@@ -1,0 +1,32 @@
+<article class="post">
+    {{ .Render "header" }}
+
+    {{ .Render "featured" }}
+    <div id="content">
+        {{ .Content }}
+    </div>
+
+    <!--section id="back-to-top-link">
+        <a class="button big" href="#"><i class="fa fa-arrow-up"></i>&nbsp;Back To Top</a>
+    </section-->
+    <div class="line-solid-horizontal"></div>
+
+    <section id="social-share">
+        <ul class="icons">
+            {{ partial "share-links" . }}
+        </ul>
+    </section>
+
+    <footer>
+        {{ .Render "footer-category" }}
+    </footer>
+</article>
+{{ .Render "prev-next" }}
+
+{{ if ne .Site.DisqusShortname "" }}
+    {{ if not (in (printf "%#v" .Site.BaseURL) "localhost") }}
+        <article class="post">
+            {{ template "_internal/disqus.html" . }}
+        </article>
+    {{ end }}
+{{ end }}
