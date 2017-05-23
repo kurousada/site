@@ -1,4 +1,5 @@
 baseurl = "http://kurousada.github.io/"
+publishDir = "docs"
 languageCode = "ja-jp"
 hasCJKLanguage = true
 pygmentscodefences = true
