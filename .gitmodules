@@ -1,7 +1,3 @@
 [submodule "themes/hugo-future-imperfect"]
     path = themes/hugo-future-imperfect
     url = github.com/jpescador/hugo-future-imperfect
-[submodule "docs"]
-	path = docs
-	url = git@github.com:kurousada/kurousada.github.io.git
-	branch = master
