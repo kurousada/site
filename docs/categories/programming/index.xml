@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Programming on Hugo Future Imperfect</title>
-    <link>http://kurousada.github.io/categories/programming/</link>
+    <link>http://kurousada.github.io/site/categories/programming/</link>
     <description>Recent content in Programming on Hugo Future Imperfect</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <lastBuildDate>Sun, 28 Sep 2014 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://kurousada.github.io/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://kurousada.github.io/site/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Creating a New Theme</title>
-      <link>http://kurousada.github.io/posts/creating-a-new-theme/</link>
+      <link>http://kurousada.github.io/site/posts/creating-a-new-theme/</link>
       <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://kurousada.github.io/posts/creating-a-new-theme/</guid>
+      <guid>http://kurousada.github.io/site/posts/creating-a-new-theme/</guid>
       <description>
 
 &lt;h2 id=&#34;introduction:203afb8fdc074e80a6a8cddc7dc8ce70&#34;&gt;Introduction&lt;/h2&gt;

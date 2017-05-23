@@ -2,33 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://kurousada.github.io/</loc>
+    <loc>http://kurousada.github.io/site/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://kurousada.github.io/posts/creating-a-new-theme/</loc>
+    <loc>http://kurousada.github.io/site/posts/creating-a-new-theme/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://kurousada.github.io/about/</loc>
+    <loc>http://kurousada.github.io/site/about/</loc>
     <lastmod>2014-04-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://kurousada.github.io/posts/goisforlovers/</loc>
+    <loc>http://kurousada.github.io/site/posts/goisforlovers/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://kurousada.github.io/posts/hugoisforlovers/</loc>
+    <loc>http://kurousada.github.io/site/posts/hugoisforlovers/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://kurousada.github.io/posts/migrate-from-jekyll/</loc>
+    <loc>http://kurousada.github.io/site/posts/migrate-from-jekyll/</loc>
     <lastmod>2014-03-10T00:00:00+00:00</lastmod>
   </url>
   
