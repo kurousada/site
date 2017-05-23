@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Go on Hugo Future Imperfect</title>
+    <link>http://kurousada.github.io/categories/go/</link>
+    <description>Recent content in Go on Hugo Future Imperfect</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Wed, 02 Apr 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://kurousada.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>(Hu)go Template Primer</title>
+      <link>http://kurousada.github.io/posts/goisforlovers/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://kurousada.github.io/posts/goisforlovers/</guid>
+      <description>
+
+&lt;p&gt;Hugo uses the excellent &lt;a href=&#34;http://golang.org/&amp;gt;&#34;&gt;go&lt;/a&gt; &lt;a href=&#34;http://golang.org/pkg/html/template/&amp;gt;&#34;&gt;html/template&lt;/a&gt; library for
+its template engine. It is an extremely lightweight engine that provides a very
+small amount of logic. In our experience that it is just the right amount of
+logic to be able to create a good static website. If you have used other
+template systems from different languages or frameworks you will find a lot of
+similarities in go templates.&lt;/p&gt;
+
+&lt;p&gt;This document is a brief primer on using go templates. The &lt;a href=&#34;http://golang.org/pkg/html/template/&amp;gt;&#34;&gt;go docs&lt;/a&gt;
+provide more details.&lt;/p&gt;
+
+&lt;h2 id=&#34;introduction-to-go-templates:4d30d99f79bd431d57546bbed04b7347&#34;&gt;Introduction to Go Templates&lt;/h2&gt;
+
+&lt;p&gt;Go templates provide an extremely simple template language. It adheres to the
+belief that only the most basic of logic belongs in the template or view layer.
+One consequence of this simplicity is that go templates parse very quickly.&lt;/p&gt;
+
+&lt;p&gt;A unique characteristic of go templates is they are content aware. Variables and
+content will be sanitized depending on the context of where they are used. More
+details can be found in the &lt;a href=&#34;http://golang.org/pkg/html/template/&amp;gt;&#34;&gt;go docs&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;basic-syntax:4d30d99f79bd431d57546bbed04b7347&#34;&gt;Basic Syntax&lt;/h2&gt;
+
+&lt;p&gt;Go lang templates are html files with the addition of variables and
+functions.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Go variables and functions are accessible within {{ }}&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Accessing a predefined variable &amp;ldquo;foo&amp;rdquo;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Parameters are separated using spaces&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Calling the add function with input of 1, 2:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;add&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Methods and fields are accessed via dot notation&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Accessing the Page Parameter &amp;ldquo;bar&amp;rdquo;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params.bar&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Parentheses can be used to group items together&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;or&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;isset&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;alt&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;isset&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;caption&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt; Caption &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;variables:4d30d99f79bd431d57546bbed04b7347&#34;&gt;Variables&lt;/h2&gt;
+
+&lt;p&gt;Each go template has a struct (object) made available to it. In hugo each
+template is passed either a page or a node struct depending on which type of
+page you are rendering. More details are available on the
+&lt;a href=&#34;http://kurousada.github.io/layout/variables&#34;&gt;variables&lt;/a&gt; page.&lt;/p&gt;
+
+&lt;p&gt;A variable is accessed by referencing the variable name.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Title&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Variables can also be defined and referenced.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;address&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;123 Main St.&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;address&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;functions:4d30d99f79bd431d57546bbed04b7347&#34;&gt;Functions&lt;/h2&gt;
+
+&lt;p&gt;Go template ship with a few functions which provide basic functionality. The go
+template system also provides a mechanism for applications to extend the
+available functions with their own. &lt;a href=&#34;http://kurousada.github.io/layout/functions&#34;&gt;Hugo template
+functions&lt;/a&gt; provide some additional functionality we believe
+are useful for building websites. Functions are called by using their name
+followed by the required parameters separated by spaces. Template
+functions cannot be added without recompiling hugo.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;add&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;includes:4d30d99f79bd431d57546bbed04b7347&#34;&gt;Includes&lt;/h2&gt;
+
+&lt;p&gt;When including another template you will pass to it the data it will be
+able to access. To pass along the current context please remember to
+include a trailing dot. The templates location will always be starting at
+the /layout/ directory within Hugo.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;chrome/header.html&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;logic:4d30d99f79bd431d57546bbed04b7347&#34;&gt;Logic&lt;/h2&gt;
+
+&lt;p&gt;Go templates provide the most basic iteration and conditional logic.&lt;/p&gt;
+
+&lt;h3 id=&#34;iteration:4d30d99f79bd431d57546bbed04b7347&#34;&gt;Iteration&lt;/h3&gt;
+
+&lt;p&gt;Just like in go, the go templates make heavy use of range to iterate over
+a map, array or slice. The following are different examples of how to use
+range.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Example 1: Using Context&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;range&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;array&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Example 2: Declaring value variable name&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;range&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;element&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;array&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;element&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Example 2: Declaring key and value variable name&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;range&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;index&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;element&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;array&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;index&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;element&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&#34;conditionals:4d30d99f79bd431d57546bbed04b7347&#34;&gt;Conditionals&lt;/h3&gt;
+
+&lt;p&gt;If, else, with, or, &amp;amp; and provide the framework for handling conditional
+logic in Go Templates. Like range, each statement is closed with &lt;code&gt;end&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Go Templates treat the following values as false:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;false&lt;/li&gt;
+&lt;li&gt;0&lt;/li&gt;
+&lt;li&gt;any array, slice, map, or string of length zero&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Example 1: If&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;isset&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;title&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;h4&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;index&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;title&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/h4&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Example 2: If -&amp;gt; Else&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;isset&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;alt&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;index&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;alt&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;index&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;caption&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Example 3: And &amp;amp; Or&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;{{ if and (or (isset .Params &amp;quot;title&amp;quot;) (isset .Params &amp;quot;caption&amp;quot;))
+    (isset .Params &amp;quot;attr&amp;quot;)}}
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Example 4: With&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;An alternative way of writing &amp;ldquo;if&amp;rdquo; and then referencing the same value
+is to use &amp;ldquo;with&amp;rdquo; instead. With rebinds the context &lt;code&gt;.&lt;/code&gt; within its scope,
+and skips the block if the variable is absent.&lt;/p&gt;
+
+&lt;p&gt;The first example above could be simplified as:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;with&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params.title&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;h4&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/h4&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Example 5: If -&amp;gt; Else If&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;isset&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;alt&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;index&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;alt&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;isset&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;caption&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;index&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;caption&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;pipes:4d30d99f79bd431d57546bbed04b7347&#34;&gt;Pipes&lt;/h2&gt;
+
+&lt;p&gt;One of the most powerful components of go templates is the ability to
+stack actions one after another. This is done by using pipes. Borrowed
+from unix pipes, the concept is simple, each pipeline&amp;rsquo;s output becomes the
+input of the following pipe.&lt;/p&gt;
+
+&lt;p&gt;Because of the very simple syntax of go templates, the pipe is essential
+to being able to chain together function calls. One limitation of the
+pipes is that they only can work with a single value and that value
+becomes the last parameter of the next pipeline.&lt;/p&gt;
+
+&lt;p&gt;A few simple examples should help convey how to use the pipe.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Example 1 :&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;eq&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt; Same &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;is the same as&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;eq&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt; Same &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;It does look odd to place the if at the end, but it does provide a good
+illustration of how to use the pipes.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Example 2 :&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;index&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;disqus_url&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;html&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Access the page parameter called &amp;ldquo;disqus_url&amp;rdquo; and escape the HTML.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Example 3 :&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;or&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;or&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;isset&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;isset&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;caption&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;))&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;isset&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;attr&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+Stuff Here
+&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Could be rewritten as&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt;  &lt;span style=&#34;color: #f8f8f2&#34;&gt;isset&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;caption&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;or&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;isset&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;title&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;|&lt;/span&gt;
+    &lt;span style=&#34;color: #a6e22e&#34;&gt;or&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;isset&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;attr&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+Stuff Here
+&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;context-aka-the-dot:4d30d99f79bd431d57546bbed04b7347&#34;&gt;Context (aka. the dot)&lt;/h2&gt;
+
+&lt;p&gt;The most easily overlooked concept to understand about go templates is that {{ . }}
+always refers to the current context. In the top level of your template this
+will be the data set made available to it. Inside of a iteration it will have
+the value of the current item. When inside of a loop the context has changed. .
+will no longer refer to the data available to the entire page. If you need to
+access this from within the loop you will likely want to set it to a variable
+instead of depending on the context.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;title&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Site.Title&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;range&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params.tags&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;li&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;a&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;href=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;baseurl&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;/tags/&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;urlize&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt; - &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;title&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Notice how once we have entered the loop the value of {{ . }} has changed. We
+have defined a variable outside of the loop so we have access to it from within
+the loop.&lt;/p&gt;
+
+&lt;h1 id=&#34;hugo-parameters:4d30d99f79bd431d57546bbed04b7347&#34;&gt;Hugo Parameters&lt;/h1&gt;
+
+&lt;p&gt;Hugo provides the option of passing values to the template language
+through the site configuration (for sitewide values), or through the meta
+data of each specific piece of content. You can define any values of any
+type (supported by your front matter/config format) and use them however
+you want to inside of your templates.&lt;/p&gt;
+
+&lt;h2 id=&#34;using-content-page-parameters:4d30d99f79bd431d57546bbed04b7347&#34;&gt;Using Content (page) Parameters&lt;/h2&gt;
+
+&lt;p&gt;In each piece of content you can provide variables to be used by the
+templates. This happens in the &lt;a href=&#34;http://kurousada.github.io/content/front-matter&#34;&gt;front matter&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;An example of this is used in this documentation site. Most of the pages
+benefit from having the table of contents provided. Sometimes the TOC just
+doesn&amp;rsquo;t make a lot of sense. We&amp;rsquo;ve defined a variable in our front matter
+of some pages to turn off the TOC from being displayed.&lt;/p&gt;
+
+&lt;p&gt;Here is the example front matter:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;---
+title: &amp;quot;Permalinks&amp;quot;
+date: &amp;quot;2013-11-18&amp;quot;
+aliases:
+  - &amp;quot;/doc/permalinks/&amp;quot;
+groups: [&amp;quot;extras&amp;quot;]
+groups_weight: 30
+notoc: true
+---
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here is the corresponding code inside of the template:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;  &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params.notoc&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;div&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;id=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;toc&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;class=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;well col-md-4 col-sm-6&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.TableOfContents&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;using-site-config-parameters:4d30d99f79bd431d57546bbed04b7347&#34;&gt;Using Site (config) Parameters&lt;/h2&gt;
+
+&lt;p&gt;In your top-level configuration file (eg, &lt;code&gt;config.yaml&lt;/code&gt;) you can define site
+parameters, which are values which will be available to you in chrome.&lt;/p&gt;
+
+&lt;p&gt;For instance, you might declare:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;params&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+  &lt;span style=&#34;color: #ae81ff&#34;&gt;CopyrightHTML&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Copyright&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;©&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;2013&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;John&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;Doe.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;All&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;Rights&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;Reserved.&amp;quot;&lt;/span&gt;
+  &lt;span style=&#34;color: #ae81ff&#34;&gt;TwitterUser&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;spf13&amp;quot;&lt;/span&gt;
+  &lt;span style=&#34;color: #ae81ff&#34;&gt;SidebarRecentLimit&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;5&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Within a footer layout, you might then declare a &lt;code&gt;&amp;lt;footer&amp;gt;&lt;/code&gt; which is only
+provided if the &lt;code&gt;CopyrightHTML&lt;/code&gt; parameter is provided, and if it is given,
+you would declare it to be HTML-safe, so that the HTML entity is not escaped
+again.  This would let you easily update just your top-level config file each
+January 1st, instead of hunting through your templates.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Site.Params.CopyrightHTML&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;footer&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;div&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;class=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;text-center&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.Site.Params.CopyrightHTML&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;safeHtml&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/footer&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;An alternative way of writing the &amp;ldquo;if&amp;rdquo; and then referencing the same value
+is to use &amp;ldquo;with&amp;rdquo; instead. With rebinds the context &lt;code&gt;.&lt;/code&gt; within its scope,
+and skips the block if the variable is absent:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;with&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Site.Params.TwitterUser&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;span&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;class=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;twitter&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;a&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;href=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;https://twitter.com/&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;rel=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;author&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;img&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;src=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/images/twitter.png&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;width=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;48&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;height=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;48&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;title=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Twitter: &lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;
+ &lt;span style=&#34;color: #a6e22e&#34;&gt;alt=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Twitter&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Finally, if you want to pull &amp;ldquo;magic constants&amp;rdquo; out of your layouts, you can do
+so, such as in this example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;nav&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;class=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;recent&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Recent Posts&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;ul&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;range&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;first&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Site.Params.SidebarRecentLimit&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Site.Recent&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;li&amp;gt;&amp;lt;a&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;href=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.RelPermalink&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.Title&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/nav&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

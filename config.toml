@@ -8,6 +8,7 @@ preserveTaxonomyNames = true
 paginate = 3
 disqusShortname = "shortname"
 googleAnalytics = ""
+canonifyurls = true
 
 [params]
     # Sets the meta tag description, usually reserved for the main page
@@ -88,7 +89,7 @@ googleAnalytics = ""
 # socialAppearAtTop or socialAppearAtBottom is set to true in the params area
 # The social media icons will appear on the sidebar
 [social]
-    github          = ""
+    github          = "kurousada"
     bitbucket       = ""
     jsfiddle        = ""
     codepen         = ""
@@ -115,4 +116,4 @@ googleAnalytics = ""
     facebook_admin  = ""
     twitter_domain  = ""
     twitter         = ""
-    email           = ""
+    email           = "kuro.usada+email@gmail.com"

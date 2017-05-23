@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jekyll on Hugo Future Imperfect</title>
+    <link>http://kurousada.github.io/categories/jekyll/</link>
+    <description>Recent content in Jekyll on Hugo Future Imperfect</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Mon, 10 Mar 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://kurousada.github.io/categories/jekyll/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Migrate to Hugo from Jekyll</title>
+      <link>http://kurousada.github.io/posts/migrate-from-jekyll/</link>
+      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://kurousada.github.io/posts/migrate-from-jekyll/</guid>
+      <description>
+
+&lt;h2 id=&#34;move-static-content-to-static:964c172ef5e837f03573891408d8d631&#34;&gt;Move static content to &lt;code&gt;static&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;Jekyll has a rule that any directory not starting with &lt;code&gt;_&lt;/code&gt; will be copied as-is to the &lt;code&gt;_site&lt;/code&gt; output. Hugo keeps all static content under &lt;code&gt;static&lt;/code&gt;. You should therefore move it all there.
+With Jekyll, something that looked like&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;▾ &amp;lt;root&amp;gt;/
+    ▾ images/
+        logo.png
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;should become&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;▾ &amp;lt;root&amp;gt;/
+    ▾ static/
+        ▾ images/
+            logo.png
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Additionally, you&amp;rsquo;ll want any files that should reside at the root (such as &lt;code&gt;CNAME&lt;/code&gt;) to be moved to &lt;code&gt;static&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;create-your-hugo-configuration-file:964c172ef5e837f03573891408d8d631&#34;&gt;Create your Hugo configuration file&lt;/h2&gt;
+
+&lt;p&gt;Hugo can read your configuration as JSON, YAML or TOML. Hugo supports parameters custom configuration too. Refer to the &lt;a href=&#34;http://kurousada.github.io/overview/configuration/&#34;&gt;Hugo configuration documentation&lt;/a&gt; for details.&lt;/p&gt;
+
+&lt;h2 id=&#34;set-your-configuration-publish-folder-to-site:964c172ef5e837f03573891408d8d631&#34;&gt;Set your configuration publish folder to &lt;code&gt;_site&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;The default is for Jekyll to publish to &lt;code&gt;_site&lt;/code&gt; and for Hugo to publish to &lt;code&gt;public&lt;/code&gt;. If, like me, you have &lt;a href=&#34;http://blog.blindgaenger.net/generate_github_pages_in_a_submodule.html&#34;&gt;&lt;code&gt;_site&lt;/code&gt; mapped to a git submodule on the &lt;code&gt;gh-pages&lt;/code&gt; branch&lt;/a&gt;, you&amp;rsquo;ll want to do one of two alternatives:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Change your submodule to point to map &lt;code&gt;gh-pages&lt;/code&gt; to public instead of &lt;code&gt;_site&lt;/code&gt; (recommended).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;git submodule deinit _site
+git rm _site
+git submodule add -b gh-pages
+    git@github.com:your-username/your-repo.git public
+&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Or, change the Hugo configuration to use _site instead of &lt;code&gt;public&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;{
+    ..
+    &amp;quot;publishdir&amp;quot;: &amp;quot;_site&amp;quot;,
+    ..
+}
+&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;convert-jekyll-templates-to-hugo-templates:964c172ef5e837f03573891408d8d631&#34;&gt;Convert Jekyll templates to Hugo templates&lt;/h2&gt;
+
+&lt;p&gt;That&amp;rsquo;s the bulk of the work right here. The documentation is your friend. You should refer to &lt;a href=&#34;http://jekyllrb.com/docs/templates/&#34;&gt;Jekyll&amp;rsquo;s template documentation&lt;/a&gt; if you need to refresh your memory on how you built your blog and &lt;a href=&#34;http://kurousada.github.io/layout/templates/&#34;&gt;Hugo&amp;rsquo;s template&lt;/a&gt; to learn Hugo&amp;rsquo;s way.&lt;/p&gt;
+
+&lt;p&gt;As a single reference data point, converting my templates for &lt;a href=&#34;http://heyitsalex.net/&#34;&gt;heyitsalex.net&lt;/a&gt; took me no more than a few hours.&lt;/p&gt;
+
+&lt;h2 id=&#34;convert-jekyll-plugins-to-hugo-shortcodes:964c172ef5e837f03573891408d8d631&#34;&gt;Convert Jekyll plugins to Hugo shortcodes&lt;/h2&gt;
+
+&lt;p&gt;Jekyll has &lt;a href=&#34;http://jekyllrb.com/docs/plugins/&#34;&gt;plugins&lt;/a&gt;; Hugo has &lt;a href=&#34;http://kurousada.github.io/doc/shortcodes/&#34;&gt;shortcodes&lt;/a&gt;. It&amp;rsquo;s fairly trivial to do a port.&lt;/p&gt;
+
+&lt;h3 id=&#34;implementation:964c172ef5e837f03573891408d8d631&#34;&gt;Implementation&lt;/h3&gt;
+
+&lt;p&gt;As an example, I was using a custom &lt;a href=&#34;https://github.com/alexandre-normand/alexandre-normand/blob/74bb12036a71334fdb7dba84e073382fc06908ec/_plugins/image_tag.rb&#34;&gt;&lt;code&gt;image_tag&lt;/code&gt;&lt;/a&gt; plugin to generate figures with caption when running Jekyll. As I read about shortcodes, I found Hugo had a nice built-in shortcode that does exactly the same thing.&lt;/p&gt;
+
+&lt;p&gt;Jekyll&amp;rsquo;s plugin:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;module&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Jekyll&lt;/span&gt;
+  &lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;ImageTag&lt;/span&gt; &amp;lt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Liquid::Tag&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;@url&lt;/span&gt; = &lt;span style=&#34;color: #f8f8f2&#34;&gt;nil&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;@caption&lt;/span&gt; = &lt;span style=&#34;color: #f8f8f2&#34;&gt;nil&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;@class&lt;/span&gt; = &lt;span style=&#34;color: #f8f8f2&#34;&gt;nil&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;@link&lt;/span&gt; = &lt;span style=&#34;color: #f8f8f2&#34;&gt;nil&lt;/span&gt;
+    // &lt;span style=&#34;color: #f8f8f2&#34;&gt;Patterns&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;IMAGE_URL_WITH_CLASS_AND_CAPTION&lt;/span&gt; =
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;IMAGE_URL_WITH_CLASS_AND_CAPTION_AND_LINK&lt;/span&gt; =&lt;span style=&#34;color: #e6db74&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;        /(\w+)(\s+)((https?:\/\/|\/)(\S+))(\s+)&amp;quot;(.*?)&amp;quot;(\s+)-&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;        ((https?:\/\/|\/)(\S+))(\s*)/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;i&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;IMAGE_URL_WITH_CAPTION&lt;/span&gt; =&lt;span style=&#34;color: #e6db74&#34;&gt; /((https?:\/\/|\/)(\S+))(\s+)&amp;quot;(.*?)&amp;quot;/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;i&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;IMAGE_URL_WITH_CLASS&lt;/span&gt; =&lt;span style=&#34;color: #e6db74&#34;&gt; /(\w+)(\s+)((https?:\/\/|\/)(\S+))/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;i&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;IMAGE_URL&lt;/span&gt; =&lt;span style=&#34;color: #e6db74&#34;&gt; /((https?:\/\/|\/)(\S+))/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;i&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;initialize&lt;/span&gt;(&lt;span style=&#34;color: #f8f8f2&#34;&gt;tag_name&lt;/span&gt;, &lt;span style=&#34;color: #f8f8f2&#34;&gt;markup&lt;/span&gt;, &lt;span style=&#34;color: #f8f8f2&#34;&gt;tokens&lt;/span&gt;)
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;super&lt;/span&gt;
+      &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;markup&lt;/span&gt; =~ &lt;span style=&#34;color: #f8f8f2&#34;&gt;IMAGE_URL_WITH_CLASS_AND_CAPTION_AND_LINK&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;@class&lt;/span&gt;   = &lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;@url&lt;/span&gt;     = &lt;span style=&#34;color: #f8f8f2&#34;&gt;$3&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;@caption&lt;/span&gt; = &lt;span style=&#34;color: #f8f8f2&#34;&gt;$7&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;@link&lt;/span&gt; = &lt;span style=&#34;color: #f8f8f2&#34;&gt;$9&lt;/span&gt;
+      &lt;span style=&#34;color: #66d9ef&#34;&gt;elsif&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;markup&lt;/span&gt; =~ &lt;span style=&#34;color: #f8f8f2&#34;&gt;IMAGE_URL_WITH_CLASS_AND_CAPTION&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;@class&lt;/span&gt;   = &lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;@url&lt;/span&gt;     = &lt;span style=&#34;color: #f8f8f2&#34;&gt;$3&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;@caption&lt;/span&gt; = &lt;span style=&#34;color: #f8f8f2&#34;&gt;$7&lt;/span&gt;
+      &lt;span style=&#34;color: #66d9ef&#34;&gt;elsif&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;markup&lt;/span&gt; =~ &lt;span style=&#34;color: #f8f8f2&#34;&gt;IMAGE_URL_WITH_CAPTION&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;@url&lt;/span&gt;     = &lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;@caption&lt;/span&gt; = &lt;span style=&#34;color: #f8f8f2&#34;&gt;$5&lt;/span&gt;
+      &lt;span style=&#34;color: #66d9ef&#34;&gt;elsif&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;markup&lt;/span&gt; =~ &lt;span style=&#34;color: #f8f8f2&#34;&gt;IMAGE_URL_WITH_CLASS&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;@class&lt;/span&gt; = &lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;@url&lt;/span&gt;   = &lt;span style=&#34;color: #f8f8f2&#34;&gt;$3&lt;/span&gt;
+      &lt;span style=&#34;color: #66d9ef&#34;&gt;elsif&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;markup&lt;/span&gt; =~ &lt;span style=&#34;color: #f8f8f2&#34;&gt;IMAGE_URL&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;@url&lt;/span&gt; = &lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;render&lt;/span&gt;(&lt;span style=&#34;color: #f8f8f2&#34;&gt;context&lt;/span&gt;)
+      &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;@class&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;source&lt;/span&gt; = &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;figure class=&amp;#39;#{@class}&amp;#39;&amp;gt;&amp;quot;&lt;/span&gt;
+      &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;source&lt;/span&gt; = &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;figure&amp;gt;&amp;quot;&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt;
+      &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;@link&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;source&lt;/span&gt; += &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;a href=\&amp;quot;#{@link}\&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;source&lt;/span&gt; += &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;img src=\&amp;quot;#{@url}\&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt;
+      &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;@link&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;source&lt;/span&gt; += &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;/a&amp;gt;&amp;quot;&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;source&lt;/span&gt; += &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;figcaption&amp;gt;#{@caption}&amp;lt;/figcaption&amp;gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;@caption&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;source&lt;/span&gt; += &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;/figure&amp;gt;&amp;quot;&lt;/span&gt;
+      &lt;span style=&#34;color: #f8f8f2&#34;&gt;source&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;Liquid::Template&lt;/span&gt;.&lt;span style=&#34;color: #f8f8f2&#34;&gt;register_tag&lt;/span&gt;(&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;image&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #f8f8f2&#34;&gt;Jekyll::ImageTag&lt;/span&gt;)
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;is written as this Hugo shortcode:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;&amp;lt;!-- image --&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;figure&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;with&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Get&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;class&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;class=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;with&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Get&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;link&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;a&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;href=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;img&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;src=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Get&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;src&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;
+            &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;or&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.Get&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;alt&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.Get&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;caption&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+                &lt;span style=&#34;color: #a6e22e&#34;&gt;alt=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;with&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Get&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;alt&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;                        &lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;                     &lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;                        &lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Get&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;caption&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;                     &lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;
+               &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Get&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;link&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;or&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;or&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.Get&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.Get&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;caption&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;))&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.Get&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;attr&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;figcaption&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;isset&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Params&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;title&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+        &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Get&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;title&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+        &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;or&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.Get&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;caption&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.Get&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;attr&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Get&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;caption&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+        &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;with&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Get&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;attrlink&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;a&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;href=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+            &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Get&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;attr&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+        &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;.Get&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;attrlink&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/figcaption&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;}}&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/figure&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;&amp;lt;!-- image --&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&#34;usage:964c172ef5e837f03573891408d8d631&#34;&gt;Usage&lt;/h3&gt;
+
+&lt;p&gt;I simply changed:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;{% image
+    full http://farm5.staticflickr.com/4136/4829260124_57712e570a_o_d.jpg
+    &amp;quot;One of my favorite touristy-type photos. I secretly waited for the
+    good light while we were &amp;quot;having fun&amp;quot; and took this. Only regret: a
+    stupid pole in the top-left corner of the frame I had to clumsily get
+    rid of at post-processing.&amp;quot;
+    -&amp;gt;http://www.flickr.com/photos/alexnormand/4829260124/in/
+        set-72157624547713078/ %}
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;to this (this example uses a slightly extended version named &lt;code&gt;fig&lt;/code&gt;, different than the built-in &lt;code&gt;figure&lt;/code&gt;):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;{{% fig class=&amp;quot;full&amp;quot;
+    src=&amp;quot;http://farm5.staticflickr.com/4136/4829260124_57712e570a_o_d.jpg&amp;quot;
+    title=&amp;quot;One of my favorite touristy-type photos. I secretly waited for the
+    good light while we were having fun and took this. Only regret: a stupid
+    pole in the top-left corner of the frame I had to clumsily get rid of at
+    post-processing.&amp;quot;
+    link=&amp;quot;http://www.flickr.com/photos/alexnormand/4829260124/in/
+            set-72157624547713078/&amp;quot; %}}
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;As a bonus, the shortcode named parameters are, arguably, more readable.&lt;/p&gt;
+
+&lt;h2 id=&#34;finishing-touches:964c172ef5e837f03573891408d8d631&#34;&gt;Finishing touches&lt;/h2&gt;
+
+&lt;h3 id=&#34;fix-content:964c172ef5e837f03573891408d8d631&#34;&gt;Fix content&lt;/h3&gt;
+
+&lt;p&gt;Depending on the amount of customization that was done with each post with Jekyll, this step will require more or less effort. There are no hard and fast rules here except that &lt;code&gt;hugo server --watch&lt;/code&gt; is your friend. Test your changes and fix errors as needed.&lt;/p&gt;
+
+&lt;h3 id=&#34;clean-up:964c172ef5e837f03573891408d8d631&#34;&gt;Clean up&lt;/h3&gt;
+
+&lt;p&gt;You&amp;rsquo;ll want to remove the Jekyll configuration at this point. If you have anything else that isn&amp;rsquo;t used, delete it.&lt;/p&gt;
+
+&lt;h2 id=&#34;a-practical-example-in-a-diff:964c172ef5e837f03573891408d8d631&#34;&gt;A practical example in a diff&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://heyitsalex.net/&#34;&gt;Hey, it&amp;rsquo;s Alex&lt;/a&gt; was migrated in less than a &lt;em&gt;father-with-kids day&lt;/em&gt; from Jekyll to Hugo. You can see all the changes (and screw-ups) by looking at this &lt;a href=&#34;https://github.com/alexandre-normand/alexandre-normand/compare/869d69435bd2665c3fbf5b5c78d4c22759d7613a...b7f6605b1265e83b4b81495423294208cc74d610&#34;&gt;diff&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
