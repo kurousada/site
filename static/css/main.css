@@ -85,10 +85,12 @@
 
 /* main content */
 
+/*
 .post > header {
   margin: 0 3em 3em 3em;
   width:100%;
 }
+*/
 
 .post > .image.featured img:hover {
   transform: none;
@@ -99,10 +101,13 @@
 }
 
 .post > .image.featured + .featured-copyright {
-  margin:.3em 3em 3em 3em;
   text-align:right;
+  font-size:small;
+  margin-right: .5em;
+  margin-top: .5em;
 }
 
+/*
 .post {
   padding:0;
 }
@@ -116,7 +121,7 @@
 .post > #content {
   margin: 3em;
 }
-
+*/
 #content h2 {
   border-width: 2px 0;
   border-style: solid;
