@@ -1,7 +1,7 @@
 +++
 author = "Kuro Usada"
 categories = ["Disney", "TDL", "TDS"]
-date = "2017-05-12T06:01:40+09:00"
+date = "2017-05-26T06:01:40+09:00"
 description = "Why early summer is the bast season to go to TDR"
 draft = false
 featured = "disneyland_castle_with_baloons.jpg"
