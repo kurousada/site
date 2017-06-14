@@ -1,3 +1,48 @@
+/* search */
+#search .gsib_a {
+  padding: 0;
+}
+
+#search .gsib_b {
+  display: none;
+}
+
+#search .gsc-search-button,
+#search .gsc-clear-button {
+  display: none;
+}
+
+#search .gsc-input {
+  margin: 0;
+  padding: 0;
+}
+
+#search .gsc-search-box,
+#search .gsc-search-box tr,
+#search .gsc-input-box,
+#search .gsc-input-box table,
+#search .gsc-input-box table tr {
+  border-width: 0px;
+  margin: 0;
+}
+
+#search,
+#search input[type="text"].gsc-input {
+  height: 2.75em !important;
+}
+
+#search input[type="text"].gsc-input {
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  border: 1px solid rgba(160, 160, 160, .3) !important;
+  padding-left:5px !important;
+}
+
+#search input[type="text"].gsc-input:focus {
+  border-color: transparent !important;
+}
 
 /* sidebar */
 
