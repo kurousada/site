@@ -7,9 +7,9 @@ title = "Kuro Usada ga!"
 theme = "hugo-future-imperfect"
 preserveTaxonomyNames = true
 paginate = 3
-disqusShortname = "shortname"
 googleAnalytics = ""
 canonifyurls = true
+disqusShortname = "kurousada-ga"
 
 [params]
     # Sets the meta tag description, usually reserved for the main page
