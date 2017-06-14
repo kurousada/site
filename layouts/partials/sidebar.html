@@ -57,7 +57,11 @@
                                 {{ if .Site.Params.orderByPublishDate }}
                                     {{ $.Scratch.Set "dateType" .PublishDate }}
                                 {{ else }}
-                                    {{ $.Scratch.Set "dateType" .Date }}
+                                    {{ if and .Lastmod (ne .Date .Lastmod) }}
+                                        {{ $.Scratch.Set "dateType" .Lastmod }}
+                                    {{ else }}
+                                        {{ $.Scratch.Set "dateType" .Date }}
+                                    {{ end }}
                                 {{ end }}
                                 <time class="published" datetime=
                                     '{{ ($.Scratch.Get "dateType").Format "2006-01-02" }}'>

@@ -96,8 +96,10 @@
   transform: none;
 }
 
-.post > .image.featured {
-  margin: 0;
+@media (max-width: 480px) {
+  .post > .image.featured {
+    margin-left: -1.5em;
+  }
 }
 
 .post > .image.featured + .featured-copyright {
@@ -141,6 +143,8 @@
   margin: 3em 0;
   padding: 0 0 3em 0;
   border-bottom: 1px solid rgba(160, 160, 160, .3);
+  display: flex;
+  justify0-content: flex-end;
 }
 
 #social-share {

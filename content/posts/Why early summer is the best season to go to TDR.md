@@ -1,18 +1,21 @@
 +++
-author = "Kuro Usada"
-categories = ["Disney", "TDL", "TDS"]
-date = "2017-05-26T06:01:40+09:00"
+
+title       = "初夏は東京ディズニーリゾートに行くべき！な理由"
+type        = "post"
+author      = "Kuro Usada"
+categories  = ["Disney", "TDL", "TDS"]
+date        = "2017-05-26T06:01:40+09:00"
+lastmod     = "2017-06-15T00:35:19+09:00"
 description = "Why early summer is the bast season to go to TDR"
-draft = false
-featured = "disneyland_castle_with_baloons.jpg"
-featuredpath = "date"
-featuredlocation = "http://www.flickr.com/photos/66408130@N07/16705463991"
-featuredtitle = "BALLOONS - Magic Kingdom"
-featuredcopyright = "lhbrizzante"
+draft       = false
+
+featured              = "disneyland_castle_with_baloons.jpg"
+featuredpath          = "date"
+featuredlocation      = "http://www.flickr.com/photos/66408130@N07/16705463991"
+featuredtitle         = "BALLOONS - Magic Kingdom"
+featuredcopyright     = "lhbrizzante"
 featuredcopyrightlink = "https://www.flickr.com/photos/lhbrizzante/"
-linktitle = ""
-title = "初夏は東京ディズニーリゾートに行くべき！な理由"
-type = "post"
+linktitle             = ""
 
 +++
 
