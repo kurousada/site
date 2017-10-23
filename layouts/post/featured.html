@@ -6,9 +6,33 @@
         {{ partial "img-path" . }}
         {{ $path := $.Scratch.Get "path" }}
 
-        <a href="{{ .Permalink }}" class="image featured">
+        <span class="image featured">
             <img src="{{ $path }}/{{ .Params.featured }}" alt="{{ .Params.featuredtitle }} by {{ .Params.featuredcopyright }}" />
-        </a>
-        <p class="featured-copyright">"<a style="font-style:italic;" href="{{ .Params.featuredlocation }}">{{ .Params.featuredtitle }}</a>&nbsp;" by <a href="{{ .Params.featuredcopyrightlink }}">{{ .Params.featuredcopyright }}</a></p>
+        </span>
+        <p class="featured-copyright">
+            {{ if (isset .Params "featuredtitle") }}
+                {{ if (isset .Params "featuredlocation") }}
+                    <a href="{{ .Params.featuredlocation }}" target="_blank">
+                {{ end }}
+                {{ .Params.featuredtitle }}
+                {{ if (isset .Params "featuredlocation") }}
+                    </a>
+                {{ end }}
+            {{ else }}
+                {{ if (isset .Params "featuredcopyright") }}
+                    A photo taken
+                {{ end }}
+            {{ end }}
+            {{ if (isset .Params "featuredcopyright") }}
+                &nbsp;by&nbsp;
+                {{ if (isset .Params "featuredcopyrightlink") }}
+                    <a href="{{ .Params.featuredcopyrightlink }}" target="_blank">
+                {{ end }}
+                {{ .Params.featuredcopyright }}
+                {{ if (isset .Params "featuredcopyrightlink") }}
+                    </a>
+                {{ end }}
+            {{ end }}
+        </p>
     {{ end }}
 {{ end }}

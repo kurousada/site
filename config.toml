@@ -40,8 +40,8 @@ enableGitInfo = true
     # customJS             = ["default", "/path/to/file"]
 
     # Loading min files for exampleSite
-    customCSS            = ["/css/hugo-future-imperfect.min.css", "/css/main.css"]
-    customJS             = ["/js/hugo-future-imperfect.min.js"]
+    customCSS            = ["/css/hugo-future-imperfect.min.css", "/css/lightbox.min.css", "/css/main.css"]
+    customJS             = ["/js/hugo-future-imperfect.min.js", "/js/lightbox.min.js", "/js/lightbox.config.js"]
 
 # parms.intro will appear on the sidebar
 # This is optional, but it's suggested to use
@@ -50,7 +50,7 @@ enableGitInfo = true
 
     paragraph = "Kuro Usadaが楽しく遊ぶところです。<br>エサをあげると喜びます。"
 
-    about     = "Ladies and gentlemen, boys and girls. Kuro Usada ga! presented by Kuro Usada began just a few minutes ago.　Every time, Kuro Usada uses his vivid imagination to create magical imagery for all to enjoy. Nothing is more wonderful than the imagination. It can be a beautiful fantasy. Or, an exciting adventure! But beware — imagination also expand your greatest fears into a nightmare. Now, get ready for kurousada.ga, — a journey beyond your wildest imagination. W-Wait! Don't get back within just few minutes... PLEASE!"
+    about     = "Ladies and gentlemen, boys and girls. Kuro Usada ga! presented by Kuro Usada has began just a few months ago.　Every time, Kuro Usada uses his vivid imagination to create magical imagery for all to enjoy. Nothing is more wonderful than the imagination. It can be a beautiful fantasy. Or, an exciting adventure! But beware — imagination also expand your greatest fears into a nightmare. Now, get ready for a journey beyond your wildest imagination..."
 
 # This will also appear on the sidebar.
 # A width of less than 100px is recommended

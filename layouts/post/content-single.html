@@ -3,26 +3,62 @@
 
     {{ .Render "featured" }}
     <div id="content">
+        {{ if and (isset .Params "toc") (ne .Params.toc "false") }}{{ .TableOfContents }}{{ end }}
         {{ .Content }}
     </div>
 
-    <section id="back-to-top-link">
-        <a class="button big" href="#top"><i class="fa fa-arrow-up"></i>&nbsp;Back To Top</a>
-    </section>
-    <!--div class="line-solid-horizontal"></div-->
-
+    {{ if (ne .Params.nosharebuttons "true") }}
     <section id="social-share">
         <ul class="icons">
             {{ partial "share-links" . }}
         </ul>
     </section>
+    {{ end }}
 
-    <footer>
+    <div class="line-solid-horizontal"></div>
+
+    <footer class="content-footer">
         {{ .Render "footer-category" }}
+        <section class="back-to-top-link">
+            <a href="#top"><i class="fa fa-arrow-up"></i>&nbsp;Back To Top</a>
+        </section>
     </footer>
 </article>
 {{ .Render "prev-next" }}
 
+<!-- Related Posts -->
+{{ if .Params.categories }}
+
+{{ $otherPosts := where .Site.Pages ".RelPermalink" "!=" .RelPermalink }}
+{{ $relatedPosts := where $otherPosts ".Params.categories" "intersect" .Params.categories }}
+
+<aside class="navi">
+<nav id="related-posts" class="navi-content">
+  {{ if ($relatedPosts| len | lt 0) }}
+    <ul class="posts">
+      <header>
+        <h3>Related Posts</h3>
+      </header>
+      {{ range $page := $relatedPosts }}
+        <li class="post">
+          <a class="post-link" href="{{ $page.Permalink }}">
+            <article>
+              <header>
+                <h4 class="post-link-title">{{ $page.Title }}</h4>
+                <time class="published" datetime="{{ $page.Date.Format "2006-01-02" }}">{{ $page.Date.Format "January 2, 2006" }}</time>
+              </header>
+            </article>
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+  {{ end }}
+</nav>
+</aside>
+{{ end }}
+
+<!-- Comments -->
+<aside id="comments">
 {{ if ne .Site.DisqusShortname "" }}
     {{ if not (in (printf "%#v" .Site.BaseURL) "localhost") }}
         <article class="post">
@@ -30,3 +66,4 @@
         </article>
     {{ end }}
 {{ end }}
+</aside>

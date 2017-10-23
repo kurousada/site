@@ -1,0 +1,87 @@
+<!--
+    params 2-4
+    Can be positional or named
+
+    position 0, name: path
+        Can pass in the following values:
+            title: will use /img/LinkTitle as the path
+            date: will use /img/Year/Month as the path
+            /path/to/img: can pass in explicit path to the image
+
+    position 1, name: file
+        Name of the file including the file extension
+
+    position 2, name: title
+        Name of the alternate text, caption and title for the image
+
+    position 3, name: type
+        Can pass in the following values:
+            center: places the image centered
+            left: places the image to the left
+            right: places the image to the right
+
+    position 4, name: lightbox
+        Name of the group or "lightbox-group-default" will be used
+-->
+{{ $numOfParams := len .Params }}
+{{ if and (ge $numOfParams 2) (le $numOfParams 4) }}
+    <!-- Check if the Parameter is positional or named
+         which can handle both. -->
+    {{ if .IsNamedParams }}
+        {{ with .Get "path" }}{{ $.Scratch.Set "path"  . }}{{ else }}{{ $.Scratch.Set "path" "date" }}{{ end }}
+        {{ $.Scratch.Set "file"  (.Get "file") }}
+        {{ with .Get "title" }}{{ $.Scratch.Set "title" . }}{{ else }}{{ $.Scratch.Set "title" "" }}{{ end }}
+        {{ with .Get "type" }}{{ $.Scratch.Set "type"  . }}{{ else }}{{ $.Scratch.Set "type" "center" }}{{ end }}
+        {{ with .Get "lightbox" }}{{ $.Scratch.Set "lightbox"  . }}{{ else }}{{ $.Scratch.Set "lightbox" "lightbox-group-default" }}{{ end }}
+    {{ else }}
+        {{ $.Scratch.Set "path" (.Get 0) }}
+        {{ $.Scratch.Set "file" (.Get 1) }}
+        {{ if ge $numOfParams 3 }}
+            {{ $.Scratch.Set "title" (.Get 2) }}
+        {{ else }}
+            {{ $.Scratch.Set "title" "" }}
+        {{ end }}
+        {{ if ge $numOfParams 4 }}
+            {{ $.Scratch.Set "type"  (.Get 3) }}
+        {{ else }}
+            {{ $.Scratch.Set "type" "center" }}
+        {{ end }}
+        {{ if ge $numOfParams 5 }}
+            {{ $.Scratch.Set "lightbox" (.Get 4) }}
+        {{ else }}
+            {{ $.Scratch.Set "lightbox" "lightbox-group-default" }}
+        {{ end }}
+    {{ end }}
+
+    {{ $file  := $.Scratch.Get "file" }}
+    {{ $type  := $.Scratch.Get "type" }}
+    {{ $title := $.Scratch.Get "title" }}
+    {{ $lightbox := $.Scratch.Get "lightbox" }}
+    
+    {{ $.Scratch.Set "structType" "shortcode" }}
+    {{ partial "img-path" . }}
+    {{ $path := $.Scratch.Get "path" }}
+
+    {{ if eq $type "left" }}
+        <figure class="image left">
+            <a data-lightbox="{{ $lightbox }}" href="{{ $path }}/{{ $file }}" data-title="{{ $title }}">
+                <img src="{{ $path }}/{{ $file }}" alt="{{ $title }}" title="{{ $title }}" />
+            </a>
+            <figcaption>{{ $title }}</figcaption>
+        </figure>
+    {{ else if eq $type "right" }}
+        <figure class="image right">
+            <a data-lightbox="{{ $lightbox }}" href="{{ $path }}/{{ $file }}" data-title="{{ $title }}">
+                <img src="{{ $path }}/{{ $file }}" alt="{{ $title }}" title="{{ $title }}" />
+            </a>
+            <figcaption>{{ $title }}</figcaption>
+        </figure>
+    {{ else }}
+        <p><figure class="image center-image">
+            <a data-lightbox="{{ $lightbox }}" href="{{ $path }}/{{ $file }}" data-title="{{ $title }}">
+                <img src="{{ $path }}/{{ $file }}" alt="{{ $title }}" title="{{ $title }}" />
+            </a>
+            <figcaption>{{ $title }}</figcaption>
+        </figure></p>
+    {{ end }}
+{{ end }}

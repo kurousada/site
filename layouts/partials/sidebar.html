@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<section id="sidebar">
+<section id="sidebar" class="navi">
 
     <!-- Intro -->
         <section id="intro">
@@ -31,7 +31,7 @@
         </section>
 
     <!-- Posts List -->
-        <section id="recent-posts">
+        <section id="recent-posts" class="navi-content">
             <ul class="posts">
                 <header>
                     <h3>Recent Posts</h3>
@@ -92,7 +92,7 @@
     <!-- Otherwise this section is shown for all other links -->
     {{ if ne ($.Scratch.Get "showCategories") false }}
     <!-- Categories List -->
-        <section id="categories">
+        <section id="categories" class="navi-content">
             <ul class="posts">
                 <header>
                     <h3><a href="/categories/">Categories</a></h3>
@@ -122,7 +122,7 @@
 
     <!-- About -->
         {{ with .Site.Params.intro.about }}
-        <section class="blurb">
+        <section class="blurb" class="navi-content">
             <header>
               <h2>About</h2>
             </header>

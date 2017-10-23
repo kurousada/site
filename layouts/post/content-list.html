@@ -1,0 +1,24 @@
+<article class="post">
+    {{ .Render "header" }}
+    {{ .Render "featured" }}
+    <p style="margin-top:2em;">{{ printf "%s" .Summary | markdownify }}</p>
+
+    <!--section id="social-share" class="social-share-compact">
+        <ul class="icons">
+            {{ partial "share-links" . }}
+        </ul>
+    </section-->
+
+    <ul class="actions button-more">
+        <li><a href="{{ .Permalink }}" class="button big">Continue Reading</a></li>
+    </ul>
+
+    <div class="line-solid-horizontal"></div>
+
+    <footer class="content-footer">
+        {{ .Render "footer-category" }}
+        <section class="back-to-top-link">
+            <a href="#top"><i class="fa fa-arrow-up"></i>&nbsp;Back To Top</a>
+        </section>
+    </footer>
+</article>
