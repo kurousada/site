@@ -10,7 +10,7 @@ paginate = 5
 googleAnalytics = "UA-99969227-1"
 canonifyurls = true
 disqusShortname = "kurousada-ga"
-enableGitInfo = true
+#enableGitInfo = true
 
 [params]
     # Sets the meta tag description, usually reserved for the main page
