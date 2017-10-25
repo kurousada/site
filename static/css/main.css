@@ -149,22 +149,6 @@
 .post > header .meta > .org-time {
   padding:0;
   line-height:1em;
-  position:relative;
-  left:1em;
-}
-
-.post > header .meta > .org-time:before {
-  content:"(";
-  font:inherit;
-  position:relative;
-  left:.5em;
-}
-
-.post > header .meta > .org-time:after {
-  content:")";
-  font:inherit;
-  position:relative;
-  right:.5em;
 }
 
 .post > header .meta > .published + .author {
@@ -332,6 +316,12 @@ ul.actions.button-more li a {
 
 .back-to-top-link a {
   border-bottom: 0 none transparent;
+}
+
+@media (max-width:374px){
+  #header .main ul .back-to-top-link {
+    display:none;
+  }
 }
 
 #header .main ul .back-to-top-link > a {
