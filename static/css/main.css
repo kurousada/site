@@ -155,7 +155,7 @@
   }
   
   #post-comments.post {
-    padding:0 .5em;
+    padding:.5em .5em 0;
   }
   
   .post #TableOfContents,
