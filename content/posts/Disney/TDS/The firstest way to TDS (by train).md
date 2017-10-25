@@ -5,7 +5,7 @@ type        = "post"
 author      = "Kuro Usada"
 categories  = ["Disney", "TDS"]
 date        = "2017-05-24T01:55:11+09:00"
-lastmod     = "2017-10-20T11:32:33+09:00"
+lastmod     = "2017-10-25T12:11:33+09:00"
 description = "The firstest way to Tokyo Disney Sea (by Train)"
 draft       = false
 toc         = true
@@ -42,21 +42,27 @@ featuredcopyrightlink = "https://pixabay.com/ja/users/cegoh-94852/"
 さて、いくつもの階段・エスカレーター・動く歩道を通り、ホームへと降り立ったら **8両目** に乗りましょう。<br>
 舞浜駅では進行方向左側のドアが開きます。<br>
 
+{{< fig file="P_20170615_194540.jpg" title="降りると目の前に階段があります" >}}
+
 ## ディズニーリゾートラインへの乗り換え
 
-{{< fig path="date" file="P6150108.JPG" title="東京ディズニーシーへの乗り換え案内板" >}}
+{{< fig file="P6150108.JPG" title="東京ディズニーシーへの乗り換え案内板" >}}
 
 舞浜駅の改札を出たら、左に進みます。<br>
 そのまま道なりに進み、ディズニーリゾートラインのリゾートゲートウェイ・ステーションの改札を通ります。<br>
 
-{{< fig path="date" file="P6150114.JPG" title="リゾートゲートウェイ・ステーションの入り口" >}}
+{{< fig file="P_20170615_185812_HDR.jpg" title="改札を出て左側へ進みます" >}}
+{{< fig file="P6150110.JPG" title="イクスピアリの方へ向かいます" >}}
+{{< fig file="P6150113.JPG" title="イクスピアリの手前奥にリゾートゲートウェイ・ステーションがあります" >}}
+{{< fig file="P6150114.JPG" title="リゾートゲートウェイ・ステーションの入り口" >}}
 
 ホームへの階段は左側に2つあるので、手前側を使いましょう。<br>
 エスカレータがあるのでホームへ上り、エスカレータを降りたらそのまま直進して **1両目** に乗ります。<br>
 
-{{< fig path="date" file="P6150117.JPG" title="リゾートゲートウェイ・ステーションのホーム行きエスカレータ" >}}
-{{< fig path="date" file="P6150121.JPG" title="リゾートゲートウェイ・ステーションのホーム" >}}
-{{< fig path="date" file="P6150122.JPG" title="リゾートライン1両目" >}}
+{{< fig file="P6150117.JPG" title="リゾートゲートウェイ・ステーションのホーム行きエスカレータ" >}}
+{{< fig file="P6150120.JPG" title="この写真の左側のエスカレータを使います" >}}
+{{< fig file="P6150121.JPG" title="リゾートゲートウェイ・ステーションのホーム" >}}
+{{< fig file="P6150122.JPG" title="リゾートライン1両目" >}}
 
 ## 東京ディズニーシー・ステーションのミラコスタ改札を使う
 

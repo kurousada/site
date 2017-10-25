@@ -11,19 +11,26 @@
         {{ end }}
     </div>
     <div class="meta">
+        {{ $.Scratch.Set "updated" "false" }}
         {{ if .Site.Params.orderByPublishDate }}
             {{ $.Scratch.Set "dateType" .PublishDate }}
         {{ else }}
             {{ if and .Lastmod (ne .Date .Lastmod) }}
                 {{ $.Scratch.Set "dateType" .Lastmod }}
+                {{ $.Scratch.Set "updated" "true" }}
             {{ else }}
                 {{ $.Scratch.Set "dateType" .Date }}
             {{ end }}
         {{ end }}
 
-        <time class="published"
-            datetime='{{ ($.Scratch.Get "dateType").Format "2006-01-02" }}'>
-            {{ ($.Scratch.Get "dateType").Format "January 2, 2006" }}</time>
+        <time class="published" datetime='{{ ($.Scratch.Get "dateType").Format "2006-01-02" }}'>
+            {{ ($.Scratch.Get "dateType").Format "January 2, 2006" }}
+        </time>
+        {{ if eq ($.Scratch.Get "updated") "true" }}
+            <p class="org-time"><time datetime='{{ .Date.Format "2006-01-02" }}'>
+              {{ .Date.Format "January 2, 2006" }}
+            </time></p>
+        {{ end }}
         <span class="author">{{ .Params.author }}</span>
         {{ if .Site.Params.includeReadingTime }}
             <p>{{ .ReadingTime }} minute read</p>
