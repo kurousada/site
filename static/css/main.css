@@ -565,3 +565,14 @@ ul.pagination {
   display:flex;
   justify-content:flex-end;
 }
+
+#sidebar .notice {
+  font-size:.8em;
+  color:#555;
+  margin-top:0;
+  margin-bottom:0;
+}
+
+#sidebar #footer .icons {
+  margin-top:1em;
+}

@@ -7,7 +7,7 @@
         {{ .Content }}
     </div>
 
-    {{ if (ne .Params.nosharebuttons "true") }}
+    {{ if (ne .Params.nosharebuttons true) }}
     <aside id="social-share" class="post-aside">
         <ul class="icons post-aside-content">
             {{ partial "share-links" . }}

@@ -7,7 +7,7 @@ date        = "2017-05-24T01:34:32+09:00"
 description = "About Kuro Usada"
 draft       = false
 
-nosharebuttons = false
+nosharebuttons = true
 
 featured      = "about.png"
 featuredpath  = "/img/main"
