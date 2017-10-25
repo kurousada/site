@@ -143,6 +143,7 @@
 @media screen and (max-width:450px) {
   .post {
     padding:3em 0 0;
+    width: calc( 100% + 6em);
   }
   
   .post #TableOfContents,
