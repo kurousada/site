@@ -1,4 +1,4 @@
-baseurl = "https://kurousada.github.io/"
+baseurl = "http://kurousada.ga/"
 publishDir = "docs"
 languageCode = "ja-jp"
 hasCJKLanguage = true
