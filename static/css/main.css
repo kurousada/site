@@ -317,17 +317,24 @@ ul.actions.button-more li a {
   padding-left: 0;
 }
 
-#social-share {
+.post-aside {
   margin: 2em 0;
   padding-top: 1em;
 }
 
-#social-share:not(.social-share-compact) {
+.post-aside:not(.compact) {
   border:1px solid rgba(160, 160, 160, .3);
 }
 
-#social-share:not(.social-share-compact):before {
+#social-share.post-aside:not(.compact):before {
   content:"Share with";
+}
+
+#content-ads.post-aside:not(.compact):before {
+  content:"Sponsered link";
+}
+
+.post-aside:not(.compact):before {
   font-size: 1.2em;
   font-weight:bold;
   position:relative;
@@ -337,17 +344,18 @@ ul.actions.button-more li a {
   padding: 0 .5em;
 }
 
-#social-share.social-share-compact {
+.post-aside.compact {
   margin: 0 0 1.5em 0;
   padding: 0;
 }
 
-#social-share ul {
+.post-aside .post-aside-content {
   padding-left:0;
   text-align:center;
+  margin:0;
 }
 
-#social-share:not(.social-share-compact) ul {
+.post-aside:not(.compact) .post-aside-content {
   position:relative;
   top:-1em;
 }

@@ -8,11 +8,19 @@
     </div>
 
     {{ if (ne .Params.nosharebuttons "true") }}
-    <section id="social-share">
-        <ul class="icons">
+    <aside id="social-share" class="post-aside">
+        <ul class="icons post-aside-content">
             {{ partial "share-links" . }}
         </ul>
-    </section>
+    </aside>
+    {{ end }}
+
+    {{ with .Site.Params.intro.ads }}
+    <!--
+    <aside id="content-ads" class="post-aside">
+        <p class="post-aside-content" style="padding-bottom:10px;">{{ . }}</p>
+    </aside>
+    -->
     {{ end }}
 
     <div class="line-solid-horizontal"></div>
