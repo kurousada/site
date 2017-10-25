@@ -145,7 +145,7 @@
     max-width:100vw;
   }
   
-  .post {
+  .post:not(#post-comments) {
     padding:3em 0 0;
     width: 100vw;
     overflow: hidden;

@@ -36,7 +36,7 @@
 <aside id="comments">
 {{ if ne .Site.DisqusShortname "" }}
     {{ if not (in (printf "%#v" .Site.BaseURL) "localhost") }}
-        <article class="post">
+        <article id="post-comments" class="post">
             {{ template "_internal/disqus.html" . }}
         </article>
     {{ end }}
