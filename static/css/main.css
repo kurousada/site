@@ -1,3 +1,8 @@
+/* share button bug fix */
+.share-btn.pinterest {
+  background:rgb(189,8,28);
+}
+
 /* search */
 #search .gsib_a {
   padding: 0;
