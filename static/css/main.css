@@ -1,6 +1,50 @@
-/* share button bug fix */
+/* share button */
+.share-btn:hover {
+  cursor:pointer;
+}
+
 .share-btn.pinterest {
   background:rgb(189,8,28);
+}
+
+.share-btn.pinterest:hover {
+  background:rgb(144,38,50);
+}
+
+.share-btn.pocket {
+  background:#ef4056;
+}
+
+.share-btn.pocket:hover {
+  background:#c73547;
+}
+
+.pocket-btn,
+.pocket-btn iframe {
+  display:inline-block;
+  margin:0;
+  padding:0;
+  max-width:0;
+  max-height:0;
+  opacity:0;
+}
+
+/* share-btn hatena */
+.share-btn.hatena {
+  background:#00a4de;
+}
+
+.icon-hatena:before {
+  content:"B!";
+  display:inline-block;
+  font-size:inherit;
+  font-weight:bold;
+  font-style:normal;
+  border:none;
+}
+
+.share-btn.hatena:hover {
+  background:#047ea9;
 }
 
 /* search */
