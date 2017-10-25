@@ -142,12 +142,13 @@
 
 @media screen and (max-width:450px) {
   #header {
-    max-width:calc(100vw + 3em);
+    max-width:100vw;
   }
   
   .post {
     padding:3em 0 0;
-    width: calc( 100% + 6em);
+    width: 100vw;
+    overflow: hidden;
   }
   
   .post #TableOfContents,
@@ -155,6 +156,12 @@
   .post #content-ads:not(.compact) {
     margin-left:.5em;
     margin-right:.5em;
+  }
+  
+  .post .image.featured img.featured-data {
+    max-width:100vw;
+    position:relative;
+    left:1.5em;
   }
 }
 
