@@ -122,15 +122,25 @@
 
     <!-- About -->
         {{ with .Site.Params.intro.about }}
-        <section class="blurb" class="navi-content">
+        <section id="intro-about" class="blurb" class="navi-content">
             <header>
               <h2>About</h2>
             </header>
-            <p>{{ . }}</p>
+            <p class="navi-content-content">{{ . }}</p>
 
             <ul class="actions">
                 <li><a href="/about/" class="button">Learn More</a></li>
             </ul>
+        </section>
+        {{ end }}
+
+    <!-- About -->
+        {{ with .Site.Params.intro.ads }}
+        <section id="intro-ads" class="blurb" class="navi-content">
+            <header>
+              <h2>Sponserd links</h2>
+            </header>
+            <p class="navi-content-content">{{ . }}</p>
         </section>
         {{ end }}
 
@@ -146,7 +156,7 @@
                 {{ end }}
             </ul>
 
-            <p class="copyright">&copy; {{ .Site.Title }}. Design: <a href="http://html5up.net" target="_blank">HTML5 UP</a>. Ported by <a href="//github.com/jpescador" target="_blank">Julio Pescador</a>. Powered by <a href="//gohugo.io" target="_blank">Hugo</a></p>
+            <p class="copyright">&copy; {{ .Site.Title }} by Kuro Usada. Designed by <a href="http://html5up.net" target="_blank">HTML5 UP</a>, Ported by <a href="//github.com/jpescador" target="_blank">Julio Pescador</a>. Powered by <a href="//gohugo.io" target="_blank">Hugo</a></p>
         </section>
 
 </section>

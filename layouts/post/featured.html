@@ -7,7 +7,8 @@
         {{ $path := $.Scratch.Get "path" }}
 
         <span class="image featured">
-            <img src="{{ $path }}/{{ .Params.featured }}" alt="{{ .Params.featuredtitle }} by {{ .Params.featuredcopyright }}" />
+            <img class="featured-data" src="{{ $path }}/{{ .Params.featured }}" alt="{{ with .Params.featuredtitle }}{{ . }}{{ else }}A photo taken{{ end }} by {{ .Params.featuredcopyright }}" onerror="this.classList.add('on-error')" />
+            <span class="featured-alt">Not found</span>
         </span>
         <p class="featured-copyright">
             {{ if (isset .Params "featuredtitle") }}

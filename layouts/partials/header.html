@@ -69,6 +69,16 @@
         {{ if not (in (printf "%#v" .Site.BaseURL) "localhost") }}
             {{ template "_internal/google_analytics.html" . }}
         {{ end }}
+        
+        {{ with .Site.Params.intro.ads }}
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <script>
+              (adsbygoogle = window.adsbygoogle || []).push({
+                google_ad_client: "ca-pub-2419792064448421",
+                enable_page_level_ads: true
+              });
+            </script>
+        {{ end }}
     </head>
     <body>
 
