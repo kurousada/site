@@ -9,7 +9,7 @@ description = "The firstest way to Tokyo Disney Sea (by Walking)"
 draft       = false
 toc         = true
 
-featured              = "P6200178.JPG"
+featured              = "P6200178.jpg"
 featuredpath          = "date"
 featuredcopyright     = "Kuro Usada"
 
@@ -85,7 +85,7 @@ featuredcopyright     = "Kuro Usada"
 すると目の前に、丁字路の交差点2とその向こうにそびえ立つ背の高いオブジェのようなものが見えてきます。
 
 {{< fig file="P_20170615_184754_HDR.jpg" title="運動公園前交差点（交差点2）" >}}
-{{< fig file="P6150141.JPG" title="浦安市運動公園入口にある謎のオブジェ" >}}
+{{< fig file="P6150141.jpg" title="浦安市運動公園入口にある謎のオブジェ" >}}
 
 ## 交差点を右へ
 
@@ -94,8 +94,8 @@ featuredcopyright     = "Kuro Usada"
 そのまま少し歩けばすぐに交差点3が出てきます。
 進行方向**左側の角**にひっそりとディズニーシーのマークが掲げられた入口が見えます。
 
-{{< fig file="P6150139.JPG" title="交差点3" >}}
-{{< fig file="P6150138.JPG" title="ディズニーシーの入口" >}}
+{{< fig file="P6150139.jpg" title="交差点3" >}}
+{{< fig file="P6150138.jpg" title="ディズニーシーの入口" >}}
 
 ## 入口からゲートまで
 
@@ -104,7 +104,7 @@ featuredcopyright     = "Kuro Usada"
 小さなゲートをくぐると自転車置き場があり、道なりに**右方向**へ進んでいくとやがて視界が開けます。
 そこで左へ曲がって進むとノースエントランスが見えてきます。**到着**です。
 
-{{< fig file="P6150137.JPG" title="この看板の向こう側にノースエントランスがあります" >}}
+{{< fig file="P6150137.jpg" title="この看板の向こう側にノースエントランスがあります" >}}
 
 ## 私の場合
 
