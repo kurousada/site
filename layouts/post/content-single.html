@@ -32,6 +32,17 @@
 </article>
 {{ .Render "prev-next" }}
 
+<!-- Comments -->
+<aside id="comments">
+{{ if ne .Site.DisqusShortname "" }}
+    {{ if not (in (printf "%#v" .Site.BaseURL) "localhost") }}
+        <article class="post">
+            {{ template "_internal/disqus.html" . }}
+        </article>
+    {{ end }}
+{{ end }}
+</aside>
+
 <!-- Related Posts -->
 {{ if .Params.categories }}
 
@@ -63,13 +74,4 @@
 </aside>
 {{ end }}
 
-<!-- Comments -->
-<aside id="comments">
-{{ if ne .Site.DisqusShortname "" }}
-    {{ if not (in (printf "%#v" .Site.BaseURL) "localhost") }}
-        <article class="post">
-            {{ template "_internal/disqus.html" . }}
-        </article>
-    {{ end }}
-{{ end }}
-</aside>
+
