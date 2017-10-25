@@ -145,10 +145,17 @@
     max-width:100vw;
   }
   
-  .post:not(#post-comments) {
-    padding:3em 0 0;
+  .post {
     width: 100vw;
     overflow: hidden;
+  }
+  
+  .post {
+    padding:3em 0 0;
+  }
+  
+  #post-comments.post {
+    padding:0 .5em;
   }
   
   .post #TableOfContents,
