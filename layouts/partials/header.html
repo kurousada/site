@@ -79,6 +79,14 @@
               });
             </script>
         {{ end }}
+      
+      <script language="JavaScript">
+        window.addEventListener( 'load', function () {
+           Array.prototype.forEach.call( document.querySelectorAll("a[href^='http']:not([href*='" + location.hostname + "'])"), function( el ){
+             el.setAttribute( 'target', '_blank' )
+           } );
+        }, false)
+      </script>
     </head>
     <body>
 

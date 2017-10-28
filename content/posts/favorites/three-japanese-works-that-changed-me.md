@@ -187,8 +187,9 @@ narcissuはもともと、ボイスのあるなしの差異による表現の幅
  2. ボイスを聞きたい方は第一作『narcissu』のボイスありをプレイ
  3. 第二作『narcissu SIDE 2nd』が気になる方はプレイ
 
-なお、太っ腹なことに『narcissu』と『narcissu SIDE 2nd』は[**Webで無料公開**されています](http://stage-nana.sakura.ne.jp/narcissu.htm)。
+なお、太っ腹なことに『narcissu』と『narcissu SIDE 2nd』は**Webで無料公開**されています。
 
+詳しくは[Narcissuは絶対やるべき！絶対！！]({{< relref "narcissu/narcissu.md" >}})を読んでください。
 
 
 
