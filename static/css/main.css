@@ -192,9 +192,6 @@
   .post {
     width: 100vw;
     overflow: hidden;
-  }
-  
-  .post {
     padding:3em 0 0;
   }
   
@@ -297,21 +294,6 @@
   justify-content: center;
 }
 
-/*
-.post {
-  padding:0;
-}
-
-.post > section,
-.post > footer {
-  margin-left:3em;
-  margin-right:3em;
-}
-
-.post > #content {
-  margin: 3em;
-}
-*/
 #content h2 {
   border-width: 2px 0;
   border-style: solid;
@@ -321,9 +303,21 @@
   padding: 1em .5em;
 }
 
+#content h3,
 #content p {
   padding-left: .5em;
   padding-right: .5em;
+}
+
+#content h3:before {
+  content:"《";
+}
+
+#content h3:after {
+  content:"》";
+}
+
+#content p {
   line-height: 2;
   margin: 1.5em 0;
 }
@@ -332,20 +326,45 @@
   margin-bottom: 5em;
 }
 
-#content > ul {
-  list-style-type: none;
+#content > ul,
+#content > ol {
   margin: 0 .5em 0 0;
+  list-style-type: none;
+}
+
+#content > ul li:before,
+#content > ol li:before {
+  list-style-position:inside;
+  font-size:16px;
 }
 
 #content > ul li:before {
   content:"☞";
   margin-right:10px;
-  font-size:16px;
 }
 
-#content > ul li {
+#content > ol {
+  counter-reset: cnt;
+}
+
+#content > ol li:before {
+  margin-right:5px;
+  counter-increment: cnt;
+  content: counter(cnt) ".";
+}
+
+#content > ul li,
+#content > ol li {
   text-indent:-26px;
   padding-left: 26px;
+}
+
+#content .note {
+  margin:auto 1em;
+  padding:1em 1.5em;
+  box-sizing:border-box;
+  border:1px solid rgba(160, 160, 160, .3);
+  background:rgba(160, 160, 160, .1);
 }
 
 .content-footer {
@@ -509,9 +528,13 @@ ul.actions.button-more li a {
   margin-top:.5em;
 }
 
+.post ul,
+.post ol {
+  padding-left: 1.5em;
+}
+
 .post ul {
   list-style-type: georgian;
-  padding-left: 1.5em;
 }
 
 .post ul li {
@@ -556,6 +579,11 @@ ul.actions.button-more li a {
 #TableOfContents > ul ul {
   position:relative;
   top:-0.8em;
+  padding-left:1em;
+}
+
+#TableOfContents > ul ul ul {
+  top:0;
 }
 
 ul.pagination {
@@ -605,9 +633,10 @@ ul.pagination {
   margin:0;
 }
 
-#sidebar ul.actions {
-  display:flex;
-  justify-content:flex-end;
+#sidebar ul.actions,
+#sidebar ul.actions li,
+#sidebar ul.actions li .button {
+  width:100%;
 }
 
 #sidebar .notice {

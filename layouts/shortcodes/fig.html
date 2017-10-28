@@ -14,23 +14,35 @@
     position 2, name: title
         Name of the alternate text, caption and title for the image
 
-    position 3, name: type
+    position 3, name: author
+        Name of author
+    
+    position 4, name: link
+        URL of image
+    
+    position 5, name: authorlink
+        URL of author
+
+    position 6, name: type
         Can pass in the following values:
             center: places the image centered
             left: places the image to the left
             right: places the image to the right
 
-    position 4, name: lightbox
+    position 7, name: lightbox
         Name of the group or "lightbox-group-default" will be used
 -->
 {{ $numOfParams := len .Params }}
-{{ if and (ge $numOfParams 2) (le $numOfParams 4) }}
+{{ if and (ge $numOfParams 2) (le $numOfParams 8) }}
     <!-- Check if the Parameter is positional or named
          which can handle both. -->
     {{ if .IsNamedParams }}
         {{ with .Get "path" }}{{ $.Scratch.Set "path"  . }}{{ else }}{{ $.Scratch.Set "path" "date" }}{{ end }}
         {{ $.Scratch.Set "file"  (.Get "file") }}
         {{ with .Get "title" }}{{ $.Scratch.Set "title" . }}{{ else }}{{ $.Scratch.Set "title" "" }}{{ end }}
+        {{ with .Get "author" }}{{ $.Scratch.Set "author" . }}{{ else }}{{ $.Scratch.Set "author" "" }}{{ end }}
+        {{ with .Get "link" }}{{ $.Scratch.Set "link" . }}{{ else }}{{ $.Scratch.Set "link" "" }}{{ end }}
+        {{ with .Get "authorlink" }}{{ $.Scratch.Set "authorlink" . }}{{ else }}{{ $.Scratch.Set "authorlink" "" }}{{ end }}
         {{ with .Get "type" }}{{ $.Scratch.Set "type"  . }}{{ else }}{{ $.Scratch.Set "type" "center" }}{{ end }}
         {{ with .Get "lightbox" }}{{ $.Scratch.Set "lightbox"  . }}{{ else }}{{ $.Scratch.Set "lightbox" "lightbox-group-default" }}{{ end }}
     {{ else }}
@@ -42,20 +54,38 @@
             {{ $.Scratch.Set "title" "" }}
         {{ end }}
         {{ if ge $numOfParams 4 }}
-            {{ $.Scratch.Set "type"  (.Get 3) }}
+            {{ $.Scratch.Set "author" (.Get 3) }}
+        {{ else }}
+            {{ $.Scratch.Set "author" "" }}
+        {{ end }}
+        {{ if ge $numOfParams 5 }}
+            {{ $.Scratch.Set "link" (.Get 4) }}
+        {{ else }}
+            {{ $.Scratch.Set "link" "" }}
+        {{ end }}
+        {{ if ge $numOfParams 6 }}
+            {{ $.Scratch.Set "authorlink" (.Get 5) }}
+        {{ else }}
+            {{ $.Scratch.Set "authorlink" "" }}
+        {{ end }}
+        {{ if ge $numOfParams 7 }}
+            {{ $.Scratch.Set "type"  (.Get 6) }}
         {{ else }}
             {{ $.Scratch.Set "type" "center" }}
         {{ end }}
-        {{ if ge $numOfParams 5 }}
-            {{ $.Scratch.Set "lightbox" (.Get 4) }}
+        {{ if ge $numOfParams 8 }}
+            {{ $.Scratch.Set "lightbox" (.Get 7) }}
         {{ else }}
             {{ $.Scratch.Set "lightbox" "lightbox-group-default" }}
         {{ end }}
     {{ end }}
 
-    {{ $file  := $.Scratch.Get "file" }}
-    {{ $type  := $.Scratch.Get "type" }}
-    {{ $title := $.Scratch.Get "title" }}
+    {{ $file   := $.Scratch.Get "file" }}
+    {{ $type   := $.Scratch.Get "type" }}
+    {{ $title  := $.Scratch.Get "title" }}
+    {{ $author := $.Scratch.Get "author" }}
+    {{ $link   := $.Scratch.Get "link" }}
+    {{ $authorlink := $.Scratch.Get "authorlink" }}
     {{ $lightbox := $.Scratch.Get "lightbox" }}
     
     {{ $.Scratch.Set "structType" "shortcode" }}
@@ -64,11 +94,18 @@
 
     {{ if eq $type "left" }}
         <figure class="image left">
-            <a data-lightbox="{{ $lightbox }}" href="{{ $path }}/{{ $file }}" data-title="{{ $title }}">
+            <a data-lightbox="{{ $lightbox }}" href="{{ $path }}/{{ $file }}" data-title="{{ $title }}&nbsp;by&nbsp;{{ $author }}">
                 <img class="image-data" src="{{ $path }}/{{ $file }}" alt="{{ $title }}" title="{{ $title }}" onerror="this.classList.add('on-error')" />
                 <span class="image-alt">Not found</span>
             </a>
-            <figcaption>{{ $title }}</figcaption>
+            <figcaption>
+                {{ if ne $title "" }}
+                  {{ if ne $link "" }}<a href="{{ $link }}" target="_blank">{{ $title }}</a>{{ else }}{{ $title }}{{ end }}
+                {{ end }}
+                {{ if ne $author "" }}
+                  &nbsp;by&nbsp;{{ if ne $authorlink "" }}<a href="{{ $authorlink }}">{{ $author }}</a>{{ else }}{{ $author }}{{ end }}
+                {{ end }}
+            </figcaption>
         </figure>
     {{ else if eq $type "right" }}
         <figure class="image right">
@@ -76,7 +113,14 @@
                 <img class="image-data" src="{{ $path }}/{{ $file }}" alt="{{ $title }}" title="{{ $title }}" onerror="this.classList.add('on-error')" />
                 <span class="image-alt">Not found</span>
             </a>
-            <figcaption>{{ $title }}</figcaption>
+            <figcaption>
+                {{ if ne $title "" }}
+                  {{ if ne $link "" }}<a href="{{ $link }}" target="_blank">{{ $title }}</a>{{ else }}{{ $title }}{{ end }}
+                {{ end }}
+                {{ if ne $author "" }}
+                  &nbsp;by&nbsp;{{ if ne $authorlink "" }}<a href="{{ $authorlink }}">{{ $author }}</a>{{ else }}{{ $author }}{{ end }}
+                {{ end }}
+            </figcaption>
         </figure>
     {{ else }}
         <p><figure class="image center-image">
@@ -84,7 +128,14 @@
                 <img class="image-data" src="{{ $path }}/{{ $file }}" alt="{{ $title }}" title="{{ $title }}" onerror="this.classList.add('on-error')" />
                 <span class="image-alt">Not found</span>
             </a>
-            <figcaption>{{ $title }}</figcaption>
+            <figcaption>
+                {{ if ne $title "" }}
+                  {{ if ne $link "" }}<a href="{{ $link }}" target="_blank">{{ $title }}</a>{{ else }}{{ $title }}{{ end }}
+                {{ end }}
+                {{ if ne $author "" }}
+                  &nbsp;by&nbsp;{{ if ne $authorlink "" }}<a href="{{ $authorlink }}">{{ $author }}</a>{{ else }}{{ $author }}{{ end }}
+                {{ end }}
+            </figcaption>
         </figure></p>
     {{ end }}
 {{ end }}
