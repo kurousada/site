@@ -21,7 +21,7 @@ featuredtitle         = "ナルキッソス"
 
 <!--more-->
 
-## narcissuとは
+## ナルキッソスとは
 
 21歳の主人公は死を待つしかない患者のための病棟『7階』へ入ることになり、そこで出会ったセツミと病院を抜け出す、という話です。
 
@@ -37,17 +37,21 @@ narcissuシリーズとして第5作までリリースされていますが、�
 
 このうち第1作と第2作は**Webで無料公開**されています。
 
+{{< note >}}
+ナルキッソスは水仙のことで、英語での綴りは「narcissus」ですが、この作品名は「narcissu」です。
+これは自殺「suiside」の「s」を失くすという意味があるそうです。
+{{< /note >}}
+
 ## ダウンロードとインストール
 
 ### ダウンロード
 
 [narcissuの特設ページ](http://stage-nana.sakura.ne.jp/narcissu.htm)へ行き、[Downloadページ](http://stage-nana.sakura.ne.jp/down.htm)を開きます。
+そして「ダウンロード」と書かれたリンクまたはミラーのうちのどれかをクリックしてファイルをダウンロードします。
 
 {{< fig file="narcissu/screenshot_narcissu1_06.png" title="narcissuの特設ページのトップページ" >}}
 
 {{< fig file="narcissu/screenshot_narcissu1_07.png" title="narcissuの特設ページのDownloadページ" >}}
-
-「ダウンロード」と書かれたリンクまたはミラーのうちのどれかをクリックしてファイルをダウンロードします。
 
 ### インストール
 
