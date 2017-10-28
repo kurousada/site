@@ -6,7 +6,7 @@ author      = "Kuro Usada"
 categories  = ["favorites", "narcissu"]
 date        = "2017-10-28T15:50:11+09:00"
 description = "Your must play Narcissu. Absolutely."
-draft       = true
+draft       = true	
 toc         = true
 
 featured              = "narcissu/nar_top.jpg"
