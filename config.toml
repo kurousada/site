@@ -14,7 +14,7 @@ disqusShortname = "kurousada-ga"
 
 [params]
     # Sets the meta tag description, usually reserved for the main page
-    #description          = ""
+    description          = "Kuro Usada ga! Iru! Koko ni!"
     # This will appear on the top left of the navigation bar
     navbarTitle          = "Kuro Usada ga!"
     # Social media buttons that appear on the sidebar
