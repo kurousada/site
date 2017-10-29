@@ -33,8 +33,40 @@
             <!-- /CustomJS -->
         {{ end }}
 
-            <!-- This is called by default since this theme uses highlight.js -->
-            <script>hljs.initHighlightingOnLoad();</script>
-            <!--[if lte IE 8]><script src="/js/ie/respond.min.js"></script><![endif]-->
+        {{ with .Site.Params.intro.ads }}
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        {{ end }}
+      
+        <script>
+          window.addEventListener( 'load', function () {
+            (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-2419792064448421",
+              enable_page_level_ads: true
+            });
+
+            Array.prototype.forEach.call( document.querySelectorAll( "a[href^='http']:not([href*='" + location.hostname + "'])" ), function( el ){
+              el.setAttribute( 'target', '_blank' )
+            } );
+
+            if ( lightbox ) {
+              const marginTop = 15
+              const header = document.querySelector( '#header' )
+              const headerHeight = parseInt( window.getComputedStyle( header, '' ).height.slice( 0, -2 ), 10 )
+              const lightboxPosFromTop = headerHeight + marginTop
+      
+              lightbox.option({
+                "alwaysShowNavOnTouchDevices": true,
+                "fitImagesInViewport": true,
+                "positionFromTop": lightboxPosFromTop,
+                "wrapAround": true
+              })
+            }
+
+            if ( hljs ) {
+              hljs.initHighlightingOnLoad();
+            }
+          }, false)
+        </script>
+        <!--[if lte IE 8]><script src="/js/ie/respond.min.js"></script><![endif]-->
     </body>
 </html>

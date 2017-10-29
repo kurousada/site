@@ -40,8 +40,8 @@ disqusShortname = "kurousada-ga"
     # customJS             = ["default", "/path/to/file"]
 
     # Loading min files for exampleSite
-    customCSS            = ["/css/hugo-future-imperfect.min.css", "/css/lightbox.min.css", "/css/main.css"]
-    customJS             = ["/js/hugo-future-imperfect.min.js", "/js/lightbox.min.js", "/js/lightbox.config.js"]
+    customCSS            = ["/css/site.min.css", "/css/main.css"]
+    customJS             = ["/js/site.min.js"]
 
 # parms.intro will appear on the sidebar
 # This is optional, but it's suggested to use

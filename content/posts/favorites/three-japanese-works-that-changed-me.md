@@ -189,7 +189,7 @@ narcissuはもともと、ボイスのあるなしの差異による表現の幅
 
 なお、太っ腹なことに『narcissu』と『narcissu SIDE 2nd』は**Webで無料公開**されています。
 
-詳しくは[Narcissuは絶対やるべき！絶対！！]({{< relref "narcissu/narcissu.md" >}})を読んでください。
+詳しくは[Narcissuは絶対やるべき！絶対！！]({{< relref "posts/favorites/narcissu/narcissu.md" >}})を読んでください。
 
 
 
