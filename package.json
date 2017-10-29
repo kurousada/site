@@ -1,0 +1,22 @@
+{
+  "name": "kurousada.ga",
+  "version": "1.0.0",
+  "description": "kurousada.ga",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://kurousada@github.com/kurousada/site.git"
+  },
+  "author": "kurousada",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/kurousada/site/issues"
+  },
+  "homepage": "https://github.com/kurousada/site#readme"
+}
