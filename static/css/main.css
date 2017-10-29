@@ -364,7 +364,20 @@
   padding:1em 1.5em;
   box-sizing:border-box;
   border:1px solid rgba(160, 160, 160, .3);
-  background:rgba(160, 160, 160, .1);
+  background:rgba(160, 160, 160, .075);
+}
+
+#content .highlight {
+  margin:1.5em 1em;
+  padding:1em 1.5em;
+  overflow-x:scroll;
+  background:rgba(50, 50, 50, .7)!important;
+  border:1px solid rgba(160, 160, 160, .3);
+}
+
+#content pre {
+  margin:0;
+  width:auto;
 }
 
 .content-footer {
