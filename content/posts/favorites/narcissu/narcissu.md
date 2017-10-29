@@ -5,6 +5,7 @@ type        = "post"
 author      = "Kuro Usada"
 categories  = ["favorites", "narcissu"]
 date        = "2017-10-28T15:50:11+09:00"
+lastmod     = "2017-10-29T16:56:19+09:00"
 description = "Your must play Narcissu. Absolutely."
 draft       = false
 toc         = true
@@ -43,6 +44,10 @@ narcissuシリーズとして第5作までリリースされていますが、�
 {{< /note >}}
 
 ## ダウンロードとインストール
+
+{{< note >}}
+なんと<a href="https://play.google.com/store/apps/details?id=net.infernoayase.sis_tears.narcissufull&hl=ja" target="_blank">無料のAndroid版スマホアプリ</a>がありました！以下はPC版のダウンロード＆インストール方法です。
+{{< /note >}}
 
 ### ダウンロード
 
