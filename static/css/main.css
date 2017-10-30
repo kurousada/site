@@ -484,7 +484,7 @@ ul.actions.button-more li a {
 }
 
 #social-share.post-aside:not(.compact) li:not(:first-child) {
-  margin-left:.1em;
+  margin-left:.5em;
 }
 
 #social-share.post-aside:not(.compact):before {
