@@ -74,12 +74,12 @@ Freenom にログインした状態でページ上部の「Services」から「M
 
 ## Github Pages の設定
 
-Github Pages ではリポジトリのルートに`CNAME`というファイルを置き、ドメイン名を書いておくと CNAME レコードを設定でき、ホスト名として書いたドメイン名を使うことができるようになります。
+Github Pages ではリポジトリのルートにドメイン名を書いた`CNAME`というファイルを置いておくと CNAME レコードを設定でき、ホスト名として書いたドメイン名を使うことができるようになります。
 
-```sh
+```
 $ echo 'kurousada.ga' > CNAME
-$ git commit -am 'add CNAME'        # CNAME ファイルをコミット
-$ git push origin master            # Github のレポジトリに Push して反映
+$ git commit -am 'add CNAME'   # CNAME ファイルをコミット
+$ git push origin master       # Github のレポジトリに Push して反映
 ```
 
 ## これで完了

@@ -42,7 +42,7 @@ MDM の HTML テーマは`/usr/share/mdm/html-themes`にあります。
 
 今回は「[Carbon](https://github.com/linuxmint/mint-mdm-themes/tree/master/mint-mdm-themes-html/usr/share/mdm/html-themes/Carbon)」というテーマをベースにしていこうと思いますので、フォルダごとコピーします。
 
-```sh
+```
 $ cd /usr/share/mdm/html-themes
 $ sudo cp -r ./Carbon ./MyTheme
 ```
@@ -61,7 +61,7 @@ $ sudo cp -r ./Carbon ./MyTheme
 また、確認のために一々ログアウトするのはアホくさいので「MDM Theme Emulator」というエミュレータが公式に用意されています。
 起動して「開く」からテーマフォルダを選ぶとエミュレートされ、「更新」を押すことで更新できます。
 
-```sh
+```
 $ /usr/bin/mdm-theme-emulator
 ```
 
@@ -71,7 +71,7 @@ $ /usr/bin/mdm-theme-emulator
 
 テーマが完成したら出来上がったテーマをログイン画面に適用します。
 
-```sh
+```
 $ sudo /usr/sbin/mdmsetup
 ```
 

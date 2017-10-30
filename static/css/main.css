@@ -371,13 +371,21 @@
   margin:1.5em 1em;
   padding:.5em 0;
   overflow-x:scroll;
-  background:rgba(50, 50, 50, .7)!important;
-  border:1px solid rgba(160, 160, 160, .3);
   box-sizing:border-box;
   width:100%;
 }
 
 #content pre {
+  margin:1.5em 1em;
+  overflow-x:scroll;
+  width:calc(100% - 2em);
+}
+
+#content pre code {
+  margin:0;
+}
+
+#content .highlight pre {
   margin:0;
   padding:0 1em;
   width:auto;
