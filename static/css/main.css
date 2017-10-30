@@ -483,6 +483,10 @@ ul.actions.button-more li a {
   border:1px solid rgba(160, 160, 160, .3);
 }
 
+#social-share.post-aside:not(.compact) li:not(:first-child) {
+  margin-left:.1em;
+}
+
 #social-share.post-aside:not(.compact):before {
   content:"Share with";
 }
