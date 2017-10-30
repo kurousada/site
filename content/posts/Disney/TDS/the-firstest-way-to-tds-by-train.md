@@ -6,14 +6,13 @@ author      = "Kuro Usada"
 categories  = ["Disney", "TDS"]
 date        = "2017-05-24T01:55:11+09:00"
 lastmod     = "2017-10-25T12:11:33+09:00"
-description = "The firstest way to Tokyo Disney Sea (by Train)"
+description = "The firstest way to Tokyo Disney Sea by Train"
 draft       = false
 toc         = true
 
-featured              = "tds-aquasphere-plaza.jpg"
-featuredpath          = "date"
+featured              = true
 featuredlocation      = "https://pixabay.com/photo-248123/"
-featuredtitle         = "An untitled photo"
+featuredtitle         = "A photo"
 featuredcopyright     = "Json Goh"
 featuredcopyrightlink = "https://pixabay.com/ja/users/cegoh-94852/"
 
@@ -24,20 +23,20 @@ featuredcopyrightlink = "https://pixabay.com/ja/users/cegoh-94852/"
 
 <!--more-->
 
-ちなみに、[【東京ディズニーシー】徒歩で行く時の最短ルート！]({{< relref "The firstest way to TDS (by walking).md" >}})という記事もあります。
+ちなみに、{{< relLink "the-firstest-way-to-tds-by-walking" >}}という記事もあります。
 
 ## まずは舞浜駅へ
 
 いきなり身も蓋もないことを言いますと、東京駅で乗り換えるよりも新木場で乗り換えたほうが歩く距離は少なくて済みます。<br>
 でも時期によっては混雑している電車に突っ込んでいく勢いで乗らなければならないし、せっかくなら始発から座りたいですよね。<br>
 
-{{< fig path="date" file="P6150102.jpg" title="京葉線のりば案内" type="center" >}}
+{{< fig file="P6150102.jpg" title="京葉線のりば案内" >}}
 
 そういう時は東京駅の京葉線ホームへダラダラと向かいます。<br>
 ちなみに八重洲南口からはおよそ10〜15分かかります。長い……。<br>
 品川方面から来た人は有楽町駅で一旦下車し、改札で案内書的なものをもらって乗り換えたほうが近いです。<br>
 
-{{< fig path="date" file="P6150105.jpg" title="京葉線8両目" type="center" >}}
+{{< fig file="P6150105.jpg" title="京葉線8両目" >}}
 
 さて、いくつもの階段・エスカレーター・動く歩道を通り、ホームへと降り立ったら **8両目** に乗りましょう。<br>
 舞浜駅では進行方向左側のドアが開きます。<br>
@@ -70,16 +69,16 @@ featuredcopyrightlink = "https://pixabay.com/ja/users/cegoh-94852/"
 降りたら進行方向左側奥、ホームの端っこにある **ミラコスタ改札** を通ります。<br>
 これは出口専用の小さな改札で、「東京ディズニーシー・ホテルミラコスタ連絡通路」へと抜ける改札です。<br>
 
-{{< fig path="date" file="P6150123.jpg" title="ミラコスタ改札" >}}
-{{< fig path="date" file="P6150127.jpg" title="ミラコスタ改札の案内板" >}}
+{{< fig file="P6150123.jpg" title="ミラコスタ改札" >}}
+{{< fig file="P6150127.jpg" title="ミラコスタ改札の案内板" >}}
 
 ミラコスタ改札を抜けたら、そのまま道なりに階段をぐるぐる回って1階へ降ります。<br>
 途中、2階でミラコスタへの連絡通路がありますが、**ガン無視して** 1階まで降りてください。<br>
 エレベータもありますが、エレベータを待つよりも左回りにぐるぐる階段を降りたほうが早いでしょう。<br>
 
-{{< fig path="date" file="P6150133.jpg" title="ミラコスタへの連絡通路" >}}
-{{< fig path="date" file="P6150134.jpg" title="ミラコスタ改札の出口" >}}
-{{< fig path="date" file="P6150136.jpg" title="ミラコスタ改札の出口を振り返ったところ" >}}
+{{< fig file="P6150133.jpg" title="ミラコスタへの連絡通路" >}}
+{{< fig file="P6150134.jpg" title="ミラコスタ改札の出口" >}}
+{{< fig file="P6150136.jpg" title="ミラコスタ改札の出口を振り返ったところ" >}}
 
 ## ミラコスタ改札がやってない時は？
 

@@ -9,8 +9,7 @@ description = "How to create login themes on Linux Mint"
 draft       = false
 toc         = true
 
-featured              = "how-to-create-login-themes-on-linux-mint/featured.png"
-featuredpath          = "date"
+featured              = true
 featuredtitle         = "Linux Mint default login theme"
 
 +++
@@ -66,7 +65,7 @@ $ sudo cp -r ./Carbon ./MyTheme
 $ /usr/bin/mdm-theme-emulator
 ```
 
-{{< fig file="how-to-create-login-themes-on-linux-mint/screenshot01.png" title="MDM Theme Emulatorを起動したところ" >}}
+{{< fig file="screenshot01.png" title="MDM Theme Emulatorを起動したところ" >}}
 
 ## テーマを適用する
 
@@ -79,7 +78,7 @@ $ sudo /usr/sbin/mdmsetup
 ログイン画面の設定が出てくるので一覧から自分が作ったテーマを選び、適用します。
 右上の歯車のアイコンをクリックするとプレビューできます。
 
-{{< fig file="how-to-create-login-themes-on-linux-mint/screenshot02.png" title="ログイン画面の設定" >}}
+{{< fig file="screenshot02.png" title="ログイン画面の設定" >}}
 
 最後に、一度ログアウトして適用されているか確認しましょう。
 

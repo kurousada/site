@@ -10,13 +10,11 @@ description = "Why early summer is the bast season to go to TDR"
 draft       = false
 toc         = true
 
-featured              = "disneyland_castle_with_baloons.jpg"
-featuredpath          = "date"
+featured              = true
 featuredlocation      = "https://www.flickr.com/photos/lhbrizzante/16705463991/"
 featuredtitle         = "BALLOONS - Magic Kingdom"
 featuredcopyright     = "lhbrizzante"
 featuredcopyrightlink = "https://www.flickr.com/photos/lhbrizzante/"
-linktitle             = ""
 
 +++
 

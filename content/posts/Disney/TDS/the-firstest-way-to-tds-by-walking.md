@@ -5,12 +5,11 @@ type        = "post"
 author      = "Kuro Usada"
 categories  = ["Disney", "TDS"]
 date        = "2017-10-20T11:33:16+09:00"
-description = "The firstest way to Tokyo Disney Sea (by Walking)"
+description = "The firstest way to Tokyo Disney Sea by Walking"
 draft       = false
 toc         = true
 
-featured              = "P6200178.jpg"
-featuredpath          = "date"
+featured              = true
 featuredcopyright     = "Kuro Usada"
 
 +++
@@ -22,7 +21,7 @@ featuredcopyright     = "Kuro Usada"
 
 というわけで、今回は舞浜駅から徒歩で東京ディズニーシーへ行く時の最短ルートをお教えします！
 
-なお、リゾートラインを使った最短ルートについては<a href={{< relref "The firstest way to TDS (by train).md" >}}>【東京ディズニーシー】電車で行く時の最短ルート！</a>をご覧ください。
+なお、リゾートラインを使った最短ルートについては{{< relLink "the-firstest-way-to-tds-by-train" >}}をご覧ください。
 
 ## なぜ歩くのか
 
@@ -48,7 +47,7 @@ featuredcopyright     = "Kuro Usada"
 
 ## 舞浜駅までの行き方
 
-<a href={{< relref "The firstest way to TDS (by train).md" >}}>【東京ディズニーシー】電車で行く時の最短ルート！</a>という記事を参照してください。<br>
+{{< relLink "the-firstest-way-to-tds-by-train" >}}という記事を参照してください。<br>
 ここからは舞浜駅の南口改札までたどり着いたという前提で進めます。
 
 ## まずは地上へ

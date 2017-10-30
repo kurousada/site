@@ -1,0 +1,6 @@
+{{ $path := .Get 0 }}
+{{ $Page := index (where .Site.AllPages "File.TranslationBaseName" $path) 0 }}
+{{ $href := $Page.RelPermalink }}
+{{ $title := $Page.LinkTitle }}
+
+<a href="{{ $href }}" title="{{ $title }}">{{ $title }}</a>

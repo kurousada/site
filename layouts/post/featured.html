@@ -1,39 +1,47 @@
 {{ if and (isset .Params "featuredpath") (ne .Params.featuredpath "") }}
     {{ $.Scratch.Set "path" .Params.featuredpath }}
+{{ else }}
+    {{ $.Scratch.Set "path" (print (.Page.Date.Format "/img/2006/01/") .Page.File.TranslationBaseName) }}
+{{ end }}
 
-    {{ if and (isset .Params "featured") (ne .Params.featuredpath "") }}
-        {{ $.Scratch.Set "structType" "page" }}
-        {{ partial "img-path" . }}
-        {{ $path := $.Scratch.Get "path" }}
-
-        <span class="image featured">
-            <img class="featured-data" src="{{ $path }}/{{ .Params.featured }}" alt="{{ with .Params.featuredtitle }}{{ . }}{{ else }}A photo taken{{ end }} by {{ .Params.featuredcopyright }}" onerror="this.classList.add('on-error')" />
-            <span class="featured-alt">Not found</span>
-        </span>
-        <p class="featured-copyright">
-            {{ if (isset .Params "featuredtitle") }}
-                {{ if (isset .Params "featuredlocation") }}
-                    <a href="{{ .Params.featuredlocation }}" target="_blank">
-                {{ end }}
-                {{ .Params.featuredtitle }}
-                {{ if (isset .Params "featuredlocation") }}
-                    </a>
-                {{ end }}
-            {{ else }}
-                {{ if (isset .Params "featuredcopyright") }}
-                    A photo taken
-                {{ end }}
-            {{ end }}
-            {{ if (isset .Params "featuredcopyright") }}
-                &nbsp;by&nbsp;
-                {{ if (isset .Params "featuredcopyrightlink") }}
-                    <a href="{{ .Params.featuredcopyrightlink }}" target="_blank">
-                {{ end }}
-                {{ .Params.featuredcopyright }}
-                {{ if (isset .Params "featuredcopyrightlink") }}
-                    </a>
-                {{ end }}
-            {{ end }}
-        </p>
+{{ if and (isset .Params "featured") (ne .Params.featured false) }}
+    {{ if or (eq .Params.featured "") (eq .Params.featured true) }}
+        {{ $.Scratch.Set "featured" "featured" }}
+    {{ else }}
+        {{ $.Scratch.Set "featured" .Params.featured }}
     {{ end }}
+    {{ $.Scratch.Set "structType" "page" }}
+    {{ partial "img-path" . }}
+    {{ $path := $.Scratch.Get "path" }}
+    {{ $featured := $.Scratch.Get "featured" }}
+
+    <span class="image featured">
+        <img class="featured-data" src="{{ $path }}/{{ $featured }}" alt="{{ with .Params.featuredtitle }}{{ . }}{{ else }}A photo{{ end }}{{ with .Params.featuredcopyright }} by {{ . }}{{ end }}" onerror="this.classList.add('on-error')" />
+        <span class="featured-alt">Not found</span>
+    </span>
+    <p class="featured-copyright">
+        {{ if (isset .Params "featuredtitle") }}
+            {{ if (isset .Params "featuredlocation") }}
+                <a href="{{ .Params.featuredlocation }}" target="_blank">
+            {{ end }}
+            {{ .Params.featuredtitle }}
+            {{ if (isset .Params "featuredlocation") }}
+                </a>
+            {{ end }}
+        {{ else }}
+            {{ if (isset .Params "featuredcopyright") }}
+                A photo taken
+            {{ end }}
+        {{ end }}
+        {{ if (isset .Params "featuredcopyright") }}
+            &nbsp;by&nbsp;
+            {{ if (isset .Params "featuredcopyrightlink") }}
+                <a href="{{ .Params.featuredcopyrightlink }}" target="_blank">
+            {{ end }}
+            {{ .Params.featuredcopyright }}
+            {{ if (isset .Params "featuredcopyrightlink") }}
+                </a>
+            {{ end }}
+        {{ end }}
+    </p>
 {{ end }}

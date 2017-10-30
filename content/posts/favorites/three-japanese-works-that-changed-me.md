@@ -9,8 +9,7 @@ description = "Three Japanese works that changed me"
 draft       = false
 toc         = true
 
-featured              = "three-japanese-works-that-changed-me/featured.jpg"
-featuredpath          = "date"
+featured              = true
 featuredlocation      = "https://alpha.wallhaven.cc/wallpaper/338954"
 featuredtitle         = "Untitled image"
 featuredcopyright     = "epicless"
@@ -29,7 +28,7 @@ featuredcopyrightlink = "https://alpha.wallhaven.cc/user/epicless"
 1995年放送開始のTVアニメで、そのキャラクターや謎めいたストーリーが話題になり、一部の世代では社会現象になりました。
 また、2007年からはTVシリーズの監督とスタッフによるリメイク作品として前四部作の映画シリーズ『ヱヴァンゲリヲン新劇場版』もスタートしました。
 
-{{< fig file="three-japanese-works-that-changed-me/wallhaven-300059.jpg" title="An untitled photo" author="Slipy" link="https://alpha.wallhaven.cc/wallpaper/300059" authorlink="https://alpha.wallhaven.cc/user/Slipy" >}}
+{{< fig file="wallhaven-300059.jpg" title="An untitled photo" author="Slipy" link="https://alpha.wallhaven.cc/wallpaper/300059" authorlink="https://alpha.wallhaven.cc/user/Slipy" >}}
 
 ### 作品の内容と見どころ
 
@@ -90,7 +89,7 @@ TVやCMでよく聞く曲のオリジナルがてんこ盛りで、TVシリー�
 ストーリーもさることながら、その演出が非常に高い評価を受けています。
 攻殻機動隊は他にも映画やアニメなどのシリーズがあります。
 
-{{< fig file="three-japanese-works-that-changed-me/Ghost_in_the_Shell_1995_logo.png" title="Ghost in the Shell 1995 logo" link="https://commons.wikimedia.org/wiki/File:Ghost_in_the_Shell_1995_logo.png" >}}
+{{< fig file="Ghost_in_the_Shell_1995_logo.png" title="Ghost in the Shell 1995 logo" link="https://commons.wikimedia.org/wiki/File:Ghost_in_the_Shell_1995_logo.png" >}}
 
 ### 作品の内容と見どころ
 
@@ -134,7 +133,7 @@ TVやCMでよく聞く曲のオリジナルがてんこ盛りで、TVシリー�
 全年齢対象で、いわゆるエロゲーやギャルゲーではなく、泣きゲーというジャンルに入ると思います。
 とはいえ、**ただ泣かせるだけではなく、非常に考えさせられる作品**です。
 
-{{< fig file="three-japanese-works-that-changed-me/nar_top.jpg" title="ナルキッソス" link="http://stage-nana.sakura.ne.jp/narcissu.htm" >}}
+{{< fig file="nar_top.jpg" title="ナルキッソス" link="http://stage-nana.sakura.ne.jp/narcissu.htm" >}}
 
 ### 作品の内容
 

@@ -7,6 +7,7 @@
             title: will use /img/LinkTitle as the path
             date: will use /img/Year/Month as the path
             /path/to/img: can pass in explicit path to the image
+            /img/Year/Month/File.TranslationBaseName will be used when not specified
 
     position 1, name: file
         Name of the file including the file extension
@@ -37,7 +38,7 @@
     <!-- Check if the Parameter is positional or named
          which can handle both. -->
     {{ if .IsNamedParams }}
-        {{ with .Get "path" }}{{ $.Scratch.Set "path"  . }}{{ else }}{{ $.Scratch.Set "path" "date" }}{{ end }}
+        {{ with .Get "path" }}{{ $.Scratch.Set "path"  . }}{{ else }}{{ $.Scratch.Set "path" (print (.Page.Date.Format "/img/2006/01/") .Page.File.TranslationBaseName) }}{{ end }}
         {{ $.Scratch.Set "file"  (.Get "file") }}
         {{ with .Get "title" }}{{ $.Scratch.Set "title" . }}{{ else }}{{ $.Scratch.Set "title" "" }}{{ end }}
         {{ with .Get "author" }}{{ $.Scratch.Set "author" . }}{{ else }}{{ $.Scratch.Set "author" "" }}{{ end }}
