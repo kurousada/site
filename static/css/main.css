@@ -557,6 +557,30 @@ ul.actions.button-more li a {
   margin-top:.5em;
 }
 
+#content .image-quoted,
+#content .image-quoted-cite {
+  padding:1em;
+  background:rgba(160, 160, 160, .1);
+}
+
+#content .image-quoted {
+  border: 0 none transparent;
+  margin:0;
+  padding-bottom:0;
+}
+
+#content .image-quoted-cite {
+  text-align:right;
+  color:rgba(60, 60, 60, .9);
+  padding-right:1.5em;
+  padding-top:0;
+  font-size:80%;
+}
+
+#content .image-quoted-cite cite {
+  font-style:italic;
+}
+
 .post ul,
 .post ol {
   padding-left: 1.5em;

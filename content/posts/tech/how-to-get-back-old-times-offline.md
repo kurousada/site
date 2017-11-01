@@ -11,6 +11,7 @@ toc         = true
 
 featured = true
 featuredlocation = "https://pixabay.com/photo-2569573/"
+featuredtitle = "A photo"
 featuredcopyright = "StockSnap"
 featuredcopyrightlink = "https://pixabay.com/ja/users/StockSnap-894430/"
 

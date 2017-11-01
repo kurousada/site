@@ -11,7 +11,7 @@ toc         = true
 
 featured              = true
 featuredlocation      = "https://alpha.wallhaven.cc/wallpaper/338954"
-featuredtitle         = "Untitled image"
+featuredtitle         = "An image"
 featuredcopyright     = "epicless"
 featuredcopyrightlink = "https://alpha.wallhaven.cc/user/epicless"
 
