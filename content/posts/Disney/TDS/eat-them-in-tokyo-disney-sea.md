@@ -10,7 +10,7 @@ draft       = true
 toc         = true
 
 featured              = true
-featuredlocation      = "https://pixabay.com/photo-1359226/"
+featuredlocation      = "https://pixabay.com/photo-1359225/"
 featuredtitle         = "An image"
 featuredcopyright     = "AG2016"
 featuredcopyrightlink = "https://pixabay.com/ja/users/AG2016-2432335/"
@@ -30,7 +30,7 @@ featuredcopyrightlink = "https://pixabay.com/ja/users/AG2016-2432335/"
 
 ## はじめに
 
-アップルティーソーダを連呼していますが、「アップルティーソーダとはなんじゃらほい」という方は{{< relLink "drink-them-in-tokyo-disney-sea" >}}をお読みください。
+アップルティーソーダを連呼していますが、「アップルティーソーダっちゃなんじゃらほい」という方は{{< relLink "drink-them-in-tokyo-disney-sea" >}}をお読みください。
 
 ## 肉まん
 
@@ -50,7 +50,7 @@ featuredcopyrightlink = "https://pixabay.com/ja/users/AG2016-2432335/"
 {{% note %}}現在、リフレッシュメント・ステーションでは**ポテト味のチュロス**という謎の食べ物が売られています。もっちりしていて甘じょっぱい、**やわらかい芋餅** です。一本 380円也。{{% /note %}}
 
 ノーチラスギャレーは初見殺しの店舗で、店は見えるのにそこへの行き方が一見しただけではわからない場所にあります。
-一番わかりやすいのは「ノーチラスギフト」というお店のななめ前、海側にある階段を下る行き方でしょう。
+一番わかりやすいのは「[ノーチラスギフト](http://www.tokyodisneyresort.jp/shop/detail/str_id:mi_noutilus/)」というお店のななめ前、海側にある階段を下る行き方でしょう。
 もうひとつの方の入口を使う正攻法は、小さい看板を頼りに巧妙に隠された階段を見つける必要があるためディズニーシーに慣れてからのほうがいいです。
 私はいつも見失います。
 
