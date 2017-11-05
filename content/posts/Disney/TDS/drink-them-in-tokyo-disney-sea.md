@@ -5,6 +5,7 @@ type        = "post"
 author      = "Kuro Usada"
 categories  = ["Disney", "TDS", "food"]
 date        = "2017-11-02T12:01:59+09:00"
+lastmod     = "2017-11-05T12:18:33+09:00"
 description = "Drink them in Tokyo Disney Sea"
 draft       = false
 toc         = true
@@ -76,6 +77,16 @@ featuredcopyrightlink = "https://pixabay.com/ja/users/AG2016-2432335/"
 {{< /note >}}
 
 {{% note %}}[アップルティーソーダを広める会](http://horizo.cocolog-nifty.com/blog/cat5093202/index.html)というものもあるようです。{{% /note %}}
+
+## みそクリームスープ
+
+アメリカンウォーターフロントにある「[リバティ・ランディング・ダイナー](http://www.tokyodisneyresort.jp/restaurant/detail/str_id:LLD/)」で販売している、1杯 250円の温かいスープ。
+
+名前の通り、みそ + クリームスープで、玉ねぎ主体のコンソメスープにクリームを入れて味噌を足した感じの **おいしいやつ**。
+クリームのまろやかさと味噌のちょうどいいしょっぱさ、そしてベースとなるコンソメのおいしい出汁の味が渾然一体となって、特に寒い時期はこれを飲むと体が温まり、心もほっこりし、素晴らしい効果がある。
+
+ただ、**夜の時間帯は閉まってしまう** という残念な運営時間のため、日が出ているうちに味わっておこう。
+絶対 2杯目も飲みたくなるから。
 
 ## ディープシー（パイナップルスムージー）
 
