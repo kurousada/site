@@ -570,7 +570,7 @@ ul.actions.button-more li a {
   padding-bottom:0;
 }
 
-#content .image-quoted-cite {
+#content .image-quoted + .image-quoted-cite {
   text-align:right;
   color:rgba(60, 60, 60, .9);
   padding-right:1.5em;
@@ -578,7 +578,7 @@ ul.actions.button-more li a {
   font-size:80%;
 }
 
-#content .image-quoted-cite cite {
+#content .image-quoted + .image-quoted-cite cite {
   font-style:italic;
 }
 
@@ -702,4 +702,33 @@ ul.pagination {
 
 #sidebar #footer .icons {
   margin-top:1em;
+}
+
+#content blockquote {
+  margin-left:.5em;
+  margin-right:.5em;
+}
+
+#content blockquote p {
+  margin-top:0;
+  margin-bottom:1em;
+  padding:0;
+}
+
+#content blockquote > cite:before {
+  content:"from ";
+}
+
+#content blockquote > cite {
+  display:inline-block;
+  width:100%;
+  text-align:right;
+  opacity:.87;
+}
+
+@media (max-width:450px) {
+  #content blockquote {
+    padding-left:1em;
+    padding-right:.5em;
+  }
 }

@@ -5,7 +5,7 @@ type        = "post"
 author      = "Kuro Usada"
 categories  = ["Disney", "TDS", "food"]
 date        = "2017-11-02T12:01:59+09:00"
-lastmod     = "2017-11-05T12:18:33+09:00"
+lastmod     = "2017-11-08T01:07:10+09:00"
 description = "Drink them in Tokyo Disney Sea"
 draft       = false
 toc         = true
@@ -37,6 +37,16 @@ featuredcopyrightlink = "https://pixabay.com/ja/users/AG2016-2432335/"
 ディズニーシーなのに……残念。
 
 ## キリンアップルティーソーダ
+
+<blockquote>
+{{< fig-row
+      "4u" "kc272228.JPG" ""
+      "4u" "kc272229.JPG" ""
+      "4u$" "kc272230.JPG" ""
+      "default" >}}
+<p>こちらは、飲みかけのアップルティーソーダです。なぜか、カラー・セピア・モノクロの３パターン撮ってきました（笑）この３つの写真に関しては転写掲載ＯＫなので、ぜひお使い下さい！！・・・・・って使わないですよね（－－”）</p>
+<cite><a href="http://horizo.cocolog-nifty.com/blog/2006/11/3_add2.html" title="アップルティーソーダを広める会-3: ホリ蔵のシー日記">アップルティーソーダを広める会-3: ホリ蔵のシー日記</a></cite>
+</blockquote>
 
 「アップルティー」 + 「ソーダ」という一瞬躊躇してしまう組み合わせなのですが、これが **めちゃくちゃおいしいんです**。
 
@@ -75,8 +85,6 @@ featuredcopyrightlink = "https://pixabay.com/ja/users/AG2016-2432335/"
 「<strong><a href="http://www.kirin.co.jp/company/news/2017/0926_02.html">キリン 午後の紅茶 アップルティーソーダ 赤リンゴ＆青リンゴ</a></strong>」という名称で、青りんご果汁を加えたり、炭酸感がアップしていたりするとのこと。
 希望小売価格は 500ml ペットボトル 1本 140円（税別）です。
 {{< /note >}}
-
-{{% note %}}[アップルティーソーダを広める会](http://horizo.cocolog-nifty.com/blog/cat5093202/index.html)というものもあるようです。{{% /note %}}
 
 ## みそクリームスープ
 
