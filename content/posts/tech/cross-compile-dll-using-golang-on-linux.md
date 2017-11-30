@@ -4,9 +4,9 @@ title       = "Goを使ってDLLをクロスコンパイル on Linux"
 type        = "post"
 author      = "Kuro Usada"
 categories  = ["Linux", "tech", "golang", "ukagaka"]
-date        = "2017-12-01T19:37:07+09:00"
+date        = "2017-12-01T03:00:00+09:00"
 description = "Cross Compile Dll Using Golang on Linux"
-draft       = true
+draft       = false
 toc         = true
 
 featured              = true
@@ -17,7 +17,7 @@ featuredcopyrightlink = "http://reneefrench.blogspot.com/"
 
 +++
 
-[mattn](https://mattn.kaoriya.net/) さんが公開している「[Golang で Windows の DLL を作る方法](https://mattn.kaoriya.net/software/lang/go/20160921010820.htm)」を参考に、cgo を使って Linux 上で DLL をクロスコンパイルします。
+[mattn](https://mattn.kaoriya.net/) さんによる「[Golang で Windows の DLL を作る方法](https://mattn.kaoriya.net/software/lang/go/20160921010820.htm)」という記事を参考に、cgo を使って Linux 上で DLL をクロスコンパイルします。
 Go を使えば、Windows なしで[伺か](https://ja.wikipedia.org/wiki/伺か)の SHIORI.DLL を作成することができます。ので、作ります。
 
 <!--more-->
@@ -26,18 +26,20 @@ Go を使えば、Windows なしで[伺か](https://ja.wikipedia.org/wiki/伺か
 
 明日は [kami_zh](https://qiita.com/kami_zh) さんによる Linux プログラミング関連の記事だそうです。
 
+この記事で作成する SHIORI を基に、もうちょっと機能的にしたサンプルゴーストを作りました：[github.com/kurousada/gohst](https://github.com/kurousada/gohst/)
+
 ## 必要なもの
 
  - Linux PC
  - [Go](https://golang.org/) （たぶん）1.5以上
  - [MinGW](http://www.mingw.org/)
- - [Wine](https://www.winehq.org/)
+ - [Wine](https://www.winehq.org/)（伺かベースウェアの[SSP](http://ssp.shillest.net/) を動かすためです。SSP を使わないなら要りません）
 
 この記事は以下の環境で作成しています。
 
  - [Linux Mint](https://linuxmint.com/) 18.2 Sonya Xfce 64bit
  - Go 1.9.2 linux/amd64 via [goenv](https://github.com/syndbg/goenv)
- - mingw-w64 4.0.4-2 via `apt install mingw-w64`
+ - mingw-w64 4.0.4-2 via `apt install mingw-w64` (gcc のバージョンは 5.3.1 です)
  - wine-1.6.2 via `apt install wine`
 
 ## 全体の流れ
@@ -52,10 +54,10 @@ Go を使えば、Windows なしで[伺か](https://ja.wikipedia.org/wiki/伺か
 
 ## とりあえず作ってみる
 
-DLL といえば[伺か](https://ja.wikipedia.org/wiki/伺か)の栞（shiori.dll）ですね！
+DLL といえば[伺か](https://ja.wikipedia.org/wiki/伺か)の SHIORI（shiori.dll）ですね！
 （え、伺かを「知らない」……？それは……）
 
-mattn さんも「[本物の golang を... 本物の Gopher を、お見せしますよ。](https://qiita.com/mattn/items/b7889e3c036b408ae8bd)」という記事で Pure Go の伺かベースウェア（のようなもの）を実装してましたし！
+mattn さんも「[本物の golang を... 本物の Gopher を、お見せしますよ。](https://qiita.com/mattn/items/b7889e3c036b408ae8bd)」という記事で Pure Go の伺かベースウェア（のようなもの）を実装されてましたし！
 
 [SHIORI/3.0 の仕様](http://ssp.shillest.net/ukadoc/manual/spec_dll.html)によると、`shiori.dll`は以下の3つの関数をエクスポートする必要があります。
 （伺か？SHIORI？知らねーよ！！って方には後で説明するので、とりあえず下の 3つの関数をエクスポートした DLL を作るんだということを了解していただければと思います）
@@ -191,6 +193,13 @@ $ CGO_ENABLED=1 GOOS="windows" GOARCH="386" CC="i686-w64-mingw32-gcc-win32" go b
 `unload()`を書きます。
 このとき、エクスポートしたい関数の直前に`//export 関数名`と書くとエクスポートされますので、書きます。
 
+```golang
+//export unload
+func unload() C.BOOL {
+    return C.TRUE
+}
+```
+
 そして、大事なポイント3つ目。
 
 `//export`の`//`と`export`の間に**空白を入れてはいけません！**
@@ -275,26 +284,29 @@ i686-w64-mingw32-gcc-win32 -shared -o shiori.dll shiori.def libshiori.a -Wl,--al
 `stdc++`や`winmm`、`ntdll`、`ws2_32`といったライブラリも使うので（preamble で`windows.h`インクルードしましたよね？）、`-static`をつけて静的にリンクしておきます。
 このときそれぞれのライブラリの依存に応じて順番に書いてあげないとリンカが「ふぇぇ……シンボルが見つからないよぅ」といったエラーを出します。
 
+ちなみに、`i686-w64-mingw32-gcc-win32`は 32bitをターゲットにして出力しますので GCCの`-m32`オプションはつけなくても大丈夫です。
+
 ここまで成功すれば`shiori.dll`ができているはずです。
 
-## 伺かの栞を作る
+## 伺かの SHIORI を作る
 
-なんとなくやり方がわかったところで、栞を実装します。
+なんとなくやり方がわかったところで、残りの 2つの関数を実装して SHIORI を作ります。
 
 ### 伺かとは
 
 伺かはデスクトップマスコットと呼ばれるアプリケーションで、デスクトップに（大抵は）かわいい女の子と謎の生物が住み着いて勝手に漫才しているのを眺めるソフトです。
 私の説明が下手なので楽しくなさそうですが、めっちゃ楽しいです。
-無料で利用でき、自分でキャラクターを作ることもできます。
+無料で利用でき、自分でキャラクターを作ることができたり、[オンリーイベント](http://ukagaka.dojin.com/)があったりします。
 
-仕組みについて超簡易的な説明をすると、「ベースウェア」と呼ばれるクライアントからイベントが飛んでくるので、それに応じて「栞」と呼ばれるサーバがキャラが話す内容や表情の画像などを返すというやり取りでできています。
+仕組みについて超簡易的な説明をすると、「ベースウェア」と呼ばれるクライアントからイベントが飛んでくるので、それに応じて「SHIORI」と呼ばれるサーバがキャラが話す内容や表情の画像などを返すというやり取りでできています。
 キャラクターは見た目と脳に当たる部分の分離が図られており、それぞれ「シェル」と「ゴースト」と呼ばれます。
-栞は「ゴースト」の根幹とも言える、人格を司る部分を担っていて、DLL で実装します。
+SHIORI は「ゴースト」の根幹とも言える、人格を司る部分を担っていて、DLL で実装します。
 
-普通はリクエストに応じて専用のスクリプトなどを解釈・実行しレスポンスを生成する DLL を C や C++ で書くことで、栞のすべてを DLL で賄うという大変な作業を回避してロジックとデータの分離を図ります。
-が、この記事ではそんなこと考えず超絶シンプルな「リクエストを全部無視する、何もしない栞」を Go で書いてみたいと思います。
+普通はリクエストに応じて専用のスクリプトなどを解釈・実行し、レスポンスを生成する DLL を C や C++ で書きます。
+そうすることで SHIORI のすべてを DLL で賄うという大変な作業を回避して、ロジックとデータの分離を図ります。
+が、この記事ではそんなこと考えず超絶シンプルな「リクエストを全部無視する、何もしない SHIORI」を Go で書いてみたいと思います。
 
-この記事で説明している以外の伺か関連の仕様は Google 先生に(ry
+この記事で説明している以外の伺か関連の仕様は [UKADOC](http://ssp.shillest.net/ukadoc/manual/) か Google 先生に(ry
 
 ### ソース
 
@@ -307,7 +319,7 @@ package main
    #include <windows.h>
    #include <stdlib.h>  // free()
    #include <string.h>  // strlen(), memcpy()
-*//* ここに空行入れちゃダメですよ！ */
+*/
 import "C"
 
 import (
@@ -330,7 +342,7 @@ func load(h C.HGLOBAL, length C.long) C.BOOL {
 	
     // せっかくサイズ情報があるので C.GoStringN() を使います。
     // ここは C.GoString() でも大丈夫なはず。
-    // というか long -> int のキャストってどうなのよ？
+    // というか long -> int のキャストってどうなんでしょう？
     // あ、HGLOBAL は void* なので、char* に相当する *C.char にキャストしています。
 	curDir := C.GoStringN((*C.char)(h), (C.int)(length))
 	
@@ -399,7 +411,7 @@ func request(h C.HGLOBAL, length *C.long) C.HGLOBAL {
     defer C.free((unsafe.Pointer)(res_buf))
     
     // バッファのサイズを調べます。
-    // len(res_str) でもいいんですが、折角なので strlen() を呼んでみます。
+    // len(res_str) でもいいんですが、後でキャストの手間が少しだけ省けるので strlen() を呼んでいます。
     res_size := C.strlen(res_buf)
     
     // 調べたサイズを基に、レスポンス用のメモリを確保します。
@@ -451,6 +463,8 @@ Wine の fixme がたくさん出てきますが、ちゃんと動きます。
 なお、SHIORI/3.0 を読み書きできるありがたい Go のライブラリ「[github.com/Narazaka/shiorigo](https://github.com/Narazaka/shiorigo)」を[奈良阪某](https://narazaka.net/)さんが公開してくれていますので、本格的に栞を書くなら`go get github.com/Narazaka/shiorigo`した方がよいでしょう。
 
 アドベントカレンダーに間に合うように Go で SHIORI を書いたゴーストを作っていますが、ネタが足りてないのでどうなることやら……
+と書くつもりでしたが、ネタがなくても「サンプルゴーストです」と言いはればいいかと思って [github.com/kurousada/gohst](https://github.com/kurousada/gohst) に上げました。
+ここまで解説したソースをちょっと弄ってランダムトークするようにしています。
 
 ## その他ハマりポイントとか Tips とか
 
@@ -542,10 +556,12 @@ C の代替は Go でいいんじゃないかと思えました。
 書きやすくて速くてクロスコンパイルまでできちゃうなんて、すご〜い！
 
 みんな Go を使って新しいゴーストを書けばいいと思うよ！
-……問題があるとすれば[如何か](https://github.com/Ikagaka)への移植ですが、[GopherJS](https://github.com/gopherjs/gopherjs) ならやってくれそうな気がしますし。
+問題があるとすれば[如何か](https://github.com/Ikagaka)への移植ですが、[GopherJS](https://github.com/gopherjs/gopherjs) ならやってくれそうな気がしますし……
 
 あと、この記事の最後の方は深夜テンションで書いてるので色々問題があったとしても許してください……
-実は Go をちゃんと触るのは初めてなので、間違いとかこうした方がいいよとかあったら教えてください。
+なんでこんな時間に上げることになったかとい(ry
+
+それからそれから、実は Go をちゃんと触るのは初めてなので、間違いとかこうした方がいいよとかあったら教えてください。
 
 えんいー！
 
