@@ -356,8 +356,8 @@
 
 #content > ul li,
 #content > ol li {
-  text-indent:-26px;
-  padding-left: 26px;
+  text-indent:-16px;
+  padding-left: 16px;
 }
 
 #content .note {
@@ -370,10 +370,11 @@
 
 #content .highlight {
   margin:1.5em 1em;
-  padding:.5em 0;
+/*  padding:.5em 0;
   overflow-x:scroll;
   box-sizing:border-box;
-  width:100%;
+  width:100%;*/
+  width:calc(100% - 3em);
 }
 
 #content pre {
@@ -388,8 +389,9 @@
 
 #content .highlight pre {
   margin:0;
-  padding:0 1em;
-  width:auto;
+/*  padding:0 1em;
+  width:auto;*/
+  width:100%;
 }
 
 .content-footer {

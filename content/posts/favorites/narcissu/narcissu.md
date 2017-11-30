@@ -84,5 +84,7 @@ narcissu シリーズとして第5作までリリースされていますが、�
 {{< fig file="screenshot_narcissu1_05.png" title="環境設定画面" >}}
 {{< fig file="screenshot_narcissu1_04.png" title="ゲームクリア後にしか表示されない narcissu（1作目）のメインメニュー" >}}
 
+## まとめ
+
 ぜひ、やってみてください！
 
