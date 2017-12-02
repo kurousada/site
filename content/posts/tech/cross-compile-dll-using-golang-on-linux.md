@@ -24,7 +24,7 @@ Go を使えば、Windows なしで[伺か](https://ja.wikipedia.org/wiki/伺か
 
 この記事は [Go Advent Calender 2017（その4）](https://qiita.com/advent-calendar/2017/go4) の 1日目の記事です。
 
-明日は [kami_zh](https://qiita.com/kami_zh) さんによる Linux プログラミング関連の記事だそうです。
+2日目は [kami_zh](https://qiita.com/kami_zh) さんによる「[Goで標準出力をテストする方法](https://qiita.com/kami_zh/items/ff636f15da87dabebe6c)」です。
 
 この記事で作成する SHIORI を基に、もうちょっと機能的にしたサンプルゴーストを作りました：[github.com/kurousada/gohst](https://github.com/kurousada/gohst/)
 
@@ -569,4 +569,4 @@ C の代替は Go でいいんじゃないかと思えました。
 
 この記事は [Go Advent Calender 2017（その4）](https://qiita.com/advent-calendar/2017/go4) の 1日目の記事です。
 
-明日は [kami_zh](https://qiita.com/kami_zh) さんによる Linux プログラミング関連の記事だそうです。
+2日目は [kami_zh](https://qiita.com/kami_zh) さんによる「[Goで標準出力をテストする方法](https://qiita.com/kami_zh/items/ff636f15da87dabebe6c)」です。
