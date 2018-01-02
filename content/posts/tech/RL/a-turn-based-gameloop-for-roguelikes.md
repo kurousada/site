@@ -69,7 +69,7 @@ Rogue には、以下のような特徴があります。
 元になった Rogue は様々な特徴を持っていたので、どんなゲームが Roguelike なのかという定義については議論の余地があります。
 詳しくは「[ローグライクの定義まとめ – 2dgames.jp](http://2dgames.jp/2015/03/19/roguelike/)」を参照してください。
 
-一言で言うと「やったことないなら、やってくさだい」です。
+一言で言うと「やったことないなら、やってください」です。
 
 ## ゲームループの実装方針
 
@@ -95,8 +95,10 @@ Roguelike、特に私が大好きな「[Elona](http://ylvania.org/jp/elona)」�
 今回作っているローグライクは、コンソールベースではなく Elona のような GUI にしたいと考えていました。
 しかし昔ながらのコンソールも捨てがたいし……というわけで、ロジックと UI を分離します。
 
-コンソールベースの UI は curses 一択ですが、GUI ライブラリは「SDL」「SFML」「OpenGL」などいくらでもあり、選択に迷います。
-ロジックと UI を分離することで、UI 部分が依存する GUI ライブラリのメンテナンスが止まっても労力が少なくて済みます。
+コンソールベースの UI は「curses」や「BearLibTerminal」、GUI ライブラリは「SDL」「SFML」「OpenGL」などいくらでもあり、選択に迷います。
+ロジックと UI を分離することで、UI 部分が依存する GUI ライブラリのメンテナンスが止まっても移植する労力が少なくて済みます。
+
+また、毎年「7DRL」という、7日間で Roguelike を作るというイベントがあるのですが、ロジックと UI を分離してライブラリにしておけばより簡単に作ることができます。
 
 ### NPC の AI は差し替え可能にする
 
@@ -107,7 +109,10 @@ NPC をペットとして動かすことができるようにしたいのです�
 
 今書いているのが Python 3.6 なので、サンプルは Python 3.6 で書きます（実際のコードとは異なります）。
 
-さて、まずはよくあるゲームループを見てみましょう（ブラウザは特殊なので、対応はもう少し先です）。
+さて、まずはよくあるゲームループを見てみましょう。
+これを基にどんどん書き換えていきます。
+
+なお、ブラウザの話は少し特殊なので、もう少し先で出てきます。
 
 ```python
 class Actor:
@@ -126,6 +131,8 @@ class Game:
             self.handle_input()
             self.update()
             self.draw()
+    def quit(self):
+        self.running = False
     def update(self):
         for actor in self.actors:
             actor.update()
@@ -134,13 +141,14 @@ class Game:
             actor.draw()
 
 if __name__ == '__main__':
-    Game().run()
+    game = Game()
+    game.run()
 ```
 
 このゲームループではゲームのロジックと UI の分離があまりなされていません。
 `Actor` クラスがゲームロジックも描画も司っています。
 
-そこで、`Game` オブジェクトからゲームロジックを担当する `World` クラスを切り出します。
+そこで、`Actor` クラスを `Actor` と `Sprite` に分け、`Game` クラスからゲームロジックを担当する `World` クラスを切り出します。
 そしてこの `World` クラスを `Game` クラスが持つようにし、UI から `World` の更新を進めるようにします。
 
 ```python
@@ -165,6 +173,8 @@ class Game:
             self.handle_input()
             self.update()
             self.draw()
+    def quit(self):
+        self.running = False
     def update(self):
         self.world.update()
     def draw(self):
@@ -180,7 +190,8 @@ class World:
             actor.update()
 
 if __name__ == '__main__':
-    Game().run()
+    game = Game()
+    game.run()
 ```
 
 ## 更新と描画を非同期っぽくする
@@ -230,9 +241,6 @@ class World:
             actor = self.actors[self._current_actor]
             actor.update()
             self._current_actor = (self._current_actor + 1) % len(self.actors)
-
-if __name__ == '__main__':
-    Game().run()
 ```
 
 これで更新処理と描画処理が非同期っぽくなり、更新処理の方はできるだけ多く呼ばれつつ、一定時間ごとに描画処理が呼ばれるようになりました。
@@ -306,11 +314,12 @@ class Action(ABC):
 
 そこで、AI を抽象化した `Brain` クラスを用意して、そこに AI の実装を詰め込みます。
 そして、`Brain.decide_next_action()` が呼ばれたら与えられた actor の action キューに `Action` を積むようにします。
+`Actor.get_next_action()` はお役御免です。
 
 メソッド名を変えたのは、`Brain.decide_next_action()` が直接 `Action` を返すのではなくキューに積むためです。
-こうすることでいくつかの `Action` を一連の行動としてキューに保存しておくことができます。
+こうすることでいくつかの `Action` を一連の行動としてキューに追加することができます。
 
-また、player の AI 用に `DummyBrain` という、何も `Action` を積まないものも定義しています。
+また、プレイヤーの AI 用に `DummyBrain` という、何も `Action` を積まないものも定義しています。
 
 ```python
 class Actor:
@@ -343,6 +352,7 @@ class World:
         if not actor:
             return
         
+        # action を得る
         action = actor.actions.current
         if not action:
             # actor に次の行動を問い合わせる
@@ -388,7 +398,7 @@ class World:
         self.__player__ = player
 ```
 
-そして、プレイヤーの入力を `Action` にして `World.player` の action キューに追加します。
+そして、プレイヤーの入力を基に `Action` を `World.player` の action キューに追加します。
 ここではノン・ブロッキング IO のために curses を使っています。
 
 ```python
@@ -396,7 +406,6 @@ import time
 import curses
 
 class Game:
-    MS_PER_UPDATE = 50
     def __init__(self, stdscr, world=None):
         self.stdscr    = stdscr
         self.world     = world or World()
@@ -406,16 +415,16 @@ class Game:
     def handle_input(self):
         player = self.world.player
         
-        # player の番なら
+        # プレイヤーの番なら
         if self.world.actors.current == player:
             key = self.stdscr.getkey()
             
-            # 入力によって Action を player に注入
+            # 入力を基に Action をプレイヤーに注入
             if key == curses.KEY_UP:
                 action = WalkAction(Direction.North)
                 player.actions.append(action)
             elif key == 'q':
-                self.running = False
+                self.quit()
 
 def main(stdscr):
     world = World(player=Actor())
@@ -431,38 +440,38 @@ if __name__ == '__main__':
 そんなときは、アプリケーション側のメインループを別に定義して、入力があれば `Action` を actor に注入します。
 
 ブラウザの場合は `window.setInterval()` や `window.setTimeuot()` を使います。
-コードは ES 2017 です。
+`async` / `await` を使って同期っぽく書くこともできますが、折角タイマーが用意されているのですから利用させてもらったほうがいいでしょう。
+
+ここのコードだけは ES 2017 です。
 
 ```js
 class Keyboard {
+    /* キーボードイベントを監視して、キーボードの状態を確認しやすくするクラスです。
+     * キーが押されていれば、Keyboard.keys.キー名 に KeyboardEvent オブジェクトが入ります。
+     */
     constructor(window) {
         this.window     = window
         this.keys       = {}
-        this.__paused__ = true
     }
     start() {
-        if (this.__paused__) {
-            this.window.addEventListener('keyup', this.on_keyup)
-            this.__paused__ = false
-        }
+        this.window.addEventListener('keyup', this.on_keyup)
+        this.window.addEventListener('keydown', this.on_keydown)
     }
     stop() {
-        if (!this.__paused__) {
-            this.window.removeEventListener('keyup', this.on_keyup)
-            this.__paused__ = true
-        }
-    }
-    on_keydown(event) {
-        this.keys[event.key] = event
+        this.window.removeEventListener('keyup', this.on_keyup)
+        this.window.removeEventListener('keydown', this.on_keydown)
     }
     on_keyup(event) {
         this.keys[event.key] = null
+    }
+    on_keydown(event) {
+        this.keys[event.key] = event
     }
 }
 
 class Game {
     MS_PER_HANDLE_INPUT = 100
-    MS_PER_UPDATE = 50
+    MS_PER_UPDATE = 10
     MS_PER_DRAW = 100
     constructor(window, world=null) {
         this.window       = window
@@ -480,7 +489,7 @@ class Game {
         this.update_timer = this.window.setInterval(this.update, this.MS_PER_UPDATE)
         this.draw_timer   = this.window.setInterval(this.draw, this.MS_PER_DRAW)
     }
-    pause() {
+    quit() {
         this.running      = false
         this.keyboard.stop()
         this.window.clearInterval(this.input_timer)
@@ -514,10 +523,10 @@ function main(window) {
 ## ターン制ゲームにおけるスピードの実装
 
 さて、ここまでは「完全な」ターン制でしたが、あまりに完全なためにすべての actor が同じスピードで動いていました。
-これではつまらないので Angband の Energy を使った実装を参考に、actor ごとに異なるスピードを持てるように実装します。
+これではつまらないので Angband の Energy を使った実装を参考に、actor ごとに異なるスピードを持てるようにします。
 
 まず、`Actor.speed` と `Actor.energy` を定義します。
-各ターンごとに `Actor` はスピードに応じた量の Energy を得て、一定量以上の Energy が貯まれば行動できるようになります。
+`Actor` は各ターンごとにスピードに応じた量の Energy を得て、一定量以上の Energy が貯まれば行動できるようになります。
 
 移動できない方向へ移動しようとしたときなどに Energy を消費しないよう、`Action.perform()` は成功したかどうかを返すように変更します。
 
@@ -541,6 +550,7 @@ class World:
         if not actor:
             return
         
+        # action を得る
         action = actor.actions.current
         if not action:
             # actor に次の行動を問い合わせる
@@ -552,6 +562,7 @@ class World:
         # actor に energy を与える
         actor.energy += world.calc_energy(actor.speed)
         
+        # 十分 energy があるなら行動可能
         if actor.energy >= self.ENERGY_COST:
             # action を実行する
             succeeded = action.perform(actor, world)
@@ -569,7 +580,7 @@ class World:
         return math.floor(math.erf(speed / 1000) * 1000)
 ```
 
-`Actor.speed` から 1ターンに得られる Energy を計算するのに誤差関数を使っています。
+`Actor.speed` から 1ターンごとに得られる Energy を計算するのに誤差関数を使っています。
 誤差関数が何を意味する関数なのかは正直良く知りませんが、そのグラフの形は理想的です。
 ただ、重そうな処理なので Angband のように予めテーブルを定義する方式の方がいいのかもしれません。
 
@@ -580,7 +591,7 @@ class World:
 例えば、右キーを押したらプレイヤーが右に歩くとします。
 しかしその方向に扉があったら右に歩くのではなく扉を開けてほしいですし、その方向に他の actor がいたら会話したり攻撃したりしてほしいです。
 
-そのために `Action.perform()` の返り値として成功の可否と代わりに実行すべきアクションを返すようにします。
+これを実現するために `Action.perform()` の返り値として成功の可否だけでなく、代わりに実行すべきアクションも返すようにします。
 また、複数ターンに渡って 1つの `Action` を実行できるように、実行が終了したかどうかも返すようにします。
 
 ```python
@@ -604,6 +615,7 @@ class World:
         if not actor:
             return
         
+        # action を得る
         action = actor.actions.current
         if not action:
             # actor に次の行動を問い合わせる
@@ -615,6 +627,7 @@ class World:
         # actor に energy を与える
         actor.energy += world.calc_energy(actor.speed)
         
+        # 十分 energy があるなら行動可能
         if actor.energy >= self.ENERGY_COST:
             # action を実行する
             while action:
@@ -633,11 +646,48 @@ class World:
         world.actors.proceed()
 ```
 
+「歩く」という行動を表す `WalkAction` はこんな感じになります。
+
+```python
+class WalkAction(Action):
+    def __init__(self, direction):
+        super.__init__()
+        self.direction = direction
+    def perform(self, action, world):
+        from_position = action.position
+        difference    = Direction.to_difference(self.direction)
+        to_position   = from_position + difference
+        
+        # actor が direction を向くようにする
+        actor.face = self.direction
+        
+        # to_position に actor がいるか確認する
+        neighbors = [actor for actor in world.actors if actor.position == to_position]
+        if neighbors:
+            # いれば攻撃
+            return ActionResult(succeeded=False, done=False, alternative=AttackAction(targets=neighbors))
+        
+        # to_position に 閉じた扉があるか確認する
+        doors = [tile for tile in world.fields.current.get_at(to_position) if isinstance(tile, DoorTile) and tile.closed]
+        if doors:
+            # あれば開く
+            return ActionResult(succeeded=False, done=False, alternative=OpenDoorAction(doors=doors))
+        
+        # to_position に移動できるか（壁がないかなど）確認する
+        if not world.fields.current.movable_to(self.direction, to_position):
+            return ActionResult(succeeded=False)
+        
+        # 移動する
+        actor.position = to_position
+        
+        return ActionReult(succeeded=True)
+```
+
 ## まとめ
 
 本当は昨日公開するはずでしたが、こたつに「ねぇねぇ、いっしょにいようよぉ」とせがまれてしまい、こんなに時間がかかってしまいました。
 サンプルコードは実際のコードベースから抜き出して型アノテーションをなくしたりわかりやすくなるように手直ししたものなので、動かなかったらうまくがんばってください。
 
-Go で書こうとしたものの、グラフィックライブラリが貧弱だったので Python 3.6 + pyglet 1.3 で書いています。
-でも SFML の Go バインディングがあることに気づいて書きなおそうか迷っています。
+Go で書こうとしたものの、いいグラフィックライブラリが見つからず Python 3.6 + pyglet 1.3 で書いています。
+でも SFML の Go バインディングがあることに気づいたので書きなおそうか迷っています。
 今更デスクトップゲームは流行らないかもしれないし、将来的にはブラウザでも動くようにしたいんですけども、まあとりあえず。

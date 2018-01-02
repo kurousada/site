@@ -11,7 +11,11 @@
         {{ else }}
             {{ $.Scratch.Set "siteTitle" .Site.Title }}
             {{ with .Title }}
-                <title>{{ . }} - {{ $.Scratch.Get "siteTitle" }}</title>
+                {{ if ne . ($.Scratch.Get "siteTitle") }}
+                    <title>{{ . }} - {{ $.Scratch.Get "siteTitle" }}</title>
+                {{ else }}
+                    <title>{{ . }}</title>
+                {{ end }}
             {{ else }}
                 <title>{{ .Site.Title }}</title>
             {{ end }}
