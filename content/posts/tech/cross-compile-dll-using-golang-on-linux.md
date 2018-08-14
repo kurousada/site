@@ -5,6 +5,7 @@ type        = "post"
 author      = "Kuro Usada"
 categories  = ["Linux", "tech", "golang", "ukagaka"]
 date        = "2017-12-01T03:00:00+09:00"
+lastmod     = "2018-08-14T15:41:53+09:00"
 description = "Cross Compile Dll Using Golang on Linux"
 draft       = false
 toc         = true
@@ -470,10 +471,14 @@ Wine の fixme がたくさん出てきますが、ちゃんと動きます。
 
 ### Wine上でのファイルパーミッションとFAT32
 
-Wine 上で Go の`os`パッケージを使ってファイルの読み書きをしようとすると権限がないと怒られてしまいます。
-これは FAT32 にファイルパーミッションという概念がないために起こっているようです。
+~~Wine 上で Go の`os`パッケージを使ってファイルの読み書きをしようとすると権限がないと怒られてしまいます。
+これは FAT32 にファイルパーミッションという概念がないために起こっているようです。~~
 
-仕方なく直接 Win32API の CreateFile() やら WriteFile() やら CloseFile() やらを叩いたところ、ちゃんと保存できました。
+~~仕方なく直接 Win32API の CreateFile() やら WriteFile() やら CloseFile() やらを叩いたところ、ちゃんと保存できました。~~
+
+{{< note >}}
+Ubuntu のリポジトリにある Wine が古いだけのようで、<a href="https://wiki.winehq.org/Ubuntu">WineHQ</a> を参考に Wine のバージョンを 3.0.2 に上げたら直ってました。
+{{< /note >}}
 
 ### WriteFile()のエンコーディング
 
